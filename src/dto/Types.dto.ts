@@ -27,19 +27,17 @@ export interface HeartRateZone {
 }
 
 export interface Exercise {
-  activityLevel: ActivityLevel;
-  manualValuesSpecified: ManualValuesSpecified;
-  heartRateZone: HeartRateZone;
-
   logId: number;
   activityName: string;
   activityTypeId: number;
+  activityLevel: ActivityLevel[];
   averageHeartRate: number;
   calories: number;
   duration: number;
   activeDuration: number;
   steps: number;
   logType: string;
+  manualValuesSpecified: ManualValuesSpecified;
   heartRateZones: HeartRateZone[];
   lastModified: string;
   startTime: string;
@@ -50,18 +48,15 @@ export interface Exercise {
   shouldFetchDetails: boolean;
 }
 
-export interface Value {
+// for HeartRate
+export interface HeartRateValue {
   bpm: number;
   confidence: number;
 }
 
 export interface HeartRate {
-  value: Value;
-}
-
-export interface RootObject {
   dateTime: Date;
-  value: Value;
+  value: HeartRateValue;
 }
 
 export interface LightlyActiveMinutes {
@@ -74,14 +69,16 @@ export interface ModeratlyActiveMinutes {
   value: number;
 }
 
-export interface ModeratlyActiveMinutes {
-  dateTime: Date;
+// for RestingHeartRate
+export interface RestingHeartRateValue {
+  date: string;
   value: number;
+  error: number;
 }
 
 export interface RestingHeartRate {
   dateTime: Date;
-  value: Value;
+  value: RestingHeartRateValue;
 }
 
 export interface SedentaryMinutes {
@@ -113,29 +110,35 @@ export interface Rem {
   thirtyDayAvgMinutes: number;
 }
 
+export interface SummaryType {
+  count: number;
+  minutes: number;
+  thirtyDayAvgMinutes: number;
+}
+
 export interface Summary {
-  deep: Deep;
-  wake: Wake;
-  light: Light;
-  rem: Rem;
+  deep: SummaryType;
+  wake: SummaryType;
+  light: SummaryType;
+  rem: SummaryType;
 }
 
-export interface Datum {
+export interface SleepLevelsData {
   dateTime: Date;
   level: string;
   seconds: number;
 }
 
-export interface ShortData {
+export interface SleepLevelsShortData {
   dateTime: Date;
   level: string;
   seconds: number;
 }
 
-export interface Levels {
+export interface SleepLevel {
   summary: Summary;
-  data: Datum[];
-  shortData: ShortData[];
+  data: SleepLevelsData[];
+  shortData: SleepLevelsShortData[];
 }
 export interface Sleep {
   logId: number;
@@ -151,7 +154,7 @@ export interface Sleep {
   efficiency: number;
   type: string;
   infoCode: number;
-  levels: Levels;
+  levels: SleepLevel;
   mainSleep: boolean;
 }
 
@@ -160,9 +163,20 @@ export interface Steps {
   value: number;
 }
 
-export interface Steps {
+export interface TimeInHeartRateZonesValue {
+  valuesInZones: TimeInHeartRateZonesValuesInZones;
+}
+
+export interface TimeInHeartRateZonesValuesInZones {
+  BELOW_DEFAULT_ZONE_1: number;
+  IN_DEFAULT_ZONE_1: number;
+  IN_DEFAULT_ZONE_3: number;
+  IN_DEFAULT_ZONE_2: number;
+}
+
+export interface TimeInHeartRateZones {
   dateTime: Date;
-  value: number;
+  value: TimeInHeartRateZonesValue;
 }
 
 export interface VeryActiveMinutes {
