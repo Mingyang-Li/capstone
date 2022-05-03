@@ -1,11 +1,11 @@
 export interface Calories {
-  dateTime: Date; // dateTime has a type of Date
-  value: number; // number type in typescript covers both int and floats
+  dateTime: Date;
+  value: number;
 }
 
 export interface Distance {
-  dateTime: Date; // dateTime has a type of Date
-  value: number; // number type in typescript covers both int and floats
+  dateTime: Date;
+  value: number;
 }
 
 export interface ActivityLevel {
