@@ -5,6 +5,7 @@ export interface Calories {
 
 export interface Distance {
   dateTime: Date;
+  date: Date; // auto-mapped to yyyy-mm-dd format in DB
   value: number;
 }
 
