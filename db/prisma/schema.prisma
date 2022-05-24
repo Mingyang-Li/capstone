@@ -1,0 +1,33 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DB_URL")
+}
+
+model Distance {
+  id       Int       @id @default(autoincrement())
+  dateTime DateTime? @db.Timestamp(6)
+  value    Decimal?  @db.Decimal
+  date     DateTime? @db.Date
+  userId   Int?
+  User     User?     @relation(fields: [userId], references: [id], onDelete: Restrict, onUpdate: Restrict)
+}
+
+model Steps {
+  id       Int       @id @default(autoincrement())
+  dateTime DateTime? @db.Timestamp(6)
+  date     DateTime? @db.Date
+  value    Decimal?  @db.Decimal
+  userId   Int?
+  User     User?     @relation(fields: [userId], references: [id], onDelete: Restrict, onUpdate: Restrict)
+}
+
+model User {
+  id       Int        @id @default(autoincrement())
+  auth0Id  String?
+  Distance Distance[]
+  Steps    Steps[]
+}
