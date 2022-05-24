@@ -1,6 +1,6 @@
 import { PrismaService } from './Prisma.service';
 import { Inject } from '@nestjs/common';
 
-export class StepsService {
+export class DistanceService {
   constructor(@Inject() private prismaService: PrismaService) {}
 }
