@@ -1,9 +1,8 @@
 import { CreateStepsArgs } from './../dto/steps';
 import { PrismaService } from './Prisma.service';
-import { Inject } from '@nestjs/common';
 
 export class StepsService {
-  constructor(@Inject() private prismaService: PrismaService) {}
+  constructor(private prismaService: PrismaService) {}
 
   async createSteps(param: CreateStepsArgs): Promise<any> {
     return this.prismaService.steps.create({

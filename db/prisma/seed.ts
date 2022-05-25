@@ -1,39 +1,41 @@
+// import { PrismaService } from 'src/services/Prisma.service';
+// import { StepsService } from 'src/services/Step.service';
+import { CreateStepsArgs } from 'src/dto/steps';
 import { ConfigService } from './../src/services/Config.service';
-const fs = require('fs');
+// import fs from 'fs';
 
 type File = 'calories' | 'disance' | 'steps';
 
 export class Seeding {
   constructor(
-    private configService: ConfigService,
+    private configService: ConfigService, // private stepsService: StepsService,
   ) {}
 
   openFileByUserId(userId: number, file: File) {
     const filePath = `${this.configService.PATH_LOCAL_DATASET}/p0${userId}/fitbit/${file}.json`;
-    // return filePath;
-    const rawdata = fs.readFileSync(filePath);
+    // eslint-disable-next-line @typescript-eslint/no-var-requires
+    const rawdata = require('fs').readFileSync(filePath, 'utf8');
     const json = JSON.parse(rawdata.toString());
     return json;
-    // try {
-    //   if (!fs.existsSync(filePath)) {
-    //     const rawdata = fs.readFileSync(filePath);
-    //     const json = JSON.parse(rawdata);
-    //     return json;
-    //   }
-    // } catch (err) {
-    //   return false;
-    // }
   }
 }
 
 const configService = new ConfigService();
+// const prismaService = new PrismaService();
+// const stepsService = new StepsService(prismaService);
 
 const seed = new Seeding(configService);
 const fileOpened = seed.openFileByUserId(1, 'steps');
-console.log(`fileOpened: ${fileOpened}`);
+// console.log(`len: ${fileOpened.length}`);
 
-const TABLE_TO_MIGRATE: File = '';
-const userId = 1;
-for (let i = 0, i < 16, i ++) {
-  s
+// const TABLE_TO_MIGRATE: File = '';
+// const userId = 1;
+for (let i = 0; i < 5; i++) {
+  const transformed: CreateStepsArgs = {
+    dateTime: fileOpened[i].dateTime,
+    value: fileOpened[i].value,
+    userId: i + 1,
+    date: fileOpened[i].dateTime.slice(0, 10),
+  };
+  console.log(`${i + 1} => ${JSON.stringify(transformed)}`);
 }
