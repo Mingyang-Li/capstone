@@ -1,56 +1,39 @@
 import { ConfigService } from './../src/services/Config.service';
-import { PrismaService } from './../src/services/Prisma.service';
-import { Inject } from '@nestjs/common';
-import { CaloriesService } from 'src/services/Calories.service';
-import { DistanceService } from 'src/services/Distance.service';
-import { StepsService } from 'src/services/Step.service';
-import fs from 'fs';
+const fs = require('fs');
 
 type File = 'calories' | 'disance' | 'steps';
 
-export class Seed {
+export class Seeding {
   constructor(
-    @Inject() private stepsService: StepsService,
-    @Inject() private distanceService: DistanceService,
-    @Inject() private caloriesService: CaloriesService,
-    @Inject() private configService: ConfigService,
+    private configService: ConfigService,
   ) {}
-
-  openDatasetFolder() {
-    try {
-      if (!fs.existsSync(this.configService.PATH_LOCAL_DATASET)) {
-        fs.mkdirSync(this.configService.PATH_LOCAL_DATASET);
-        return true;
-      }
-    } catch (err) {
-      return false;
-    }
-  }
 
   openFileByUserId(userId: number, file: File) {
     const filePath = `${this.configService.PATH_LOCAL_DATASET}/p0${userId}/fitbit/${file}.json`;
-    try {
-      if (!fs.existsSync(filePath)) {
-        fs.mkdirSync(filePath);
-        return true;
-      }
-    } catch (err) {
-      return false;
-    }
+    // return filePath;
+    const rawdata = fs.readFileSync(filePath);
+    const json = JSON.parse(rawdata.toString());
+    return json;
+    // try {
+    //   if (!fs.existsSync(filePath)) {
+    //     const rawdata = fs.readFileSync(filePath);
+    //     const json = JSON.parse(rawdata);
+    //     return json;
+    //   }
+    // } catch (err) {
+    //   return false;
+    // }
   }
 }
 
-const prismaService = new PrismaService();
-const stepsService = new StepsService(prismaService);
-const distanceService = new DistanceService(prismaService);
-const caloriesService = new CaloriesService(prismaService);
 const configService = new ConfigService();
 
-const seed = new Seed(
-  stepsService,
-  distanceService,
-  caloriesService,
-  configService,
-);
-const fileOpened = seed.openFileByUserId(1, 'calories');
+const seed = new Seeding(configService);
+const fileOpened = seed.openFileByUserId(1, 'steps');
 console.log(`fileOpened: ${fileOpened}`);
+
+const TABLE_TO_MIGRATE: File = '';
+const userId = 1;
+for (let i = 0, i < 16, i ++) {
+  s
+}
