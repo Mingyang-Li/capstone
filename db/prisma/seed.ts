@@ -1,6 +1,7 @@
+/* eslint-disable @typescript-eslint/no-var-requires */
 import { PrismaClient } from '@prisma/client';
+import { CreateStepsArgs } from 'src/dto/steps';
 import { ConfigService } from './../src/services/Config.service';
-import { HEARTRATE_TO_ADD } from './DemoData';
 
 type File =
   | 'calories'
@@ -9,14 +10,14 @@ type File =
   | 'heart_rate'
   | 'very_active_minutes';
 
-interface HeartRateValue {
+export interface HeartRateValue {
   bpm?: number;
   confidence?: number;
 }
 
 interface RawData {
   dateTime: string;
-  value?: number | HeartRateValue;
+  value?: number;
 }
 
 interface FileByUserId {
@@ -42,7 +43,7 @@ export class Seeding {
 }
 
 const configService = new ConfigService();
-// const prisma = new PrismaClient();
+const prisma = new PrismaClient();
 
 const seeding = new Seeding(configService);
 // const fileOpened = seeding.openFileByUserId(1, 'steps');
@@ -74,11 +75,26 @@ export const migrateSteps = () => {
     files.push({ userId: i, filePath: filename });
   }
   files.forEach((e) => {
-    // eslint-disable-next-line @typescript-eslint/no-var-requires
     const rawFile = require(e.filePath);
     e.data = rawFile;
   });
-  files.forEach((e) => console.log(`len: ${JSON.stringify(e.data[0])}`));
+
+  files.forEach((e) => {
+    const promises = [];
+    e.data.forEach((item) => {
+      const data: CreateStepsArgs = {
+        dateTime: new Date(item.dateTime),
+        date: new Date(item.dateTime),
+        value: item.value,
+        userId: e.userId,
+      };
+      // promises.push(async () => await prisma.steps.create(data));
+    });
+    // const resolvedPromises = Promise.all(promises);
+  });
+  let totalRows = 0;
+  files.forEach((e) => (totalRows += e.data.length));
+  return totalRows;
 };
 
 export const migrateCalories = () => {
@@ -89,11 +105,98 @@ export const migrateCalories = () => {
     // for (let k = 0; k < ROWS_PER_TABLE_PER_PERSON; k++) {}
   }
   files.forEach((e) => {
-    // eslint-disable-next-line @typescript-eslint/no-var-requires
     const rawFile = require(e.filePath);
     e.data = rawFile;
   });
-  files.forEach((e) => console.log(`len: ${JSON.stringify(e.data[0])}`));
+  let totalRows = 0;
+  files.forEach((e) => (totalRows += e.data.length));
+  return totalRows;
 };
 
-migrateCalories();
+export const migrateDistance = () => {
+  const files: FileByUserId[] = [];
+  for (let i = 1; i < NUM_PERSON_TO_MIGRATE + 1; i++) {
+    const filename = seeding.createFilePath(i, 'distance');
+    files.push({ userId: i, filePath: filename });
+    // for (let k = 0; k < ROWS_PER_TABLE_PER_PERSON; k++) {}
+  }
+  files.forEach((e) => {
+    const rawFile = require(e.filePath);
+    e.data = rawFile;
+  });
+  let totalRows = 0;
+  files.forEach((e) => (totalRows += e.data.length));
+  return totalRows;
+};
+
+export const migrateVeryActiveMinutes = () => {
+  const files: FileByUserId[] = [];
+  for (let i = 1; i < NUM_PERSON_TO_MIGRATE + 1; i++) {
+    const filename = seeding.createFilePath(i, 'very_active_minutes');
+    files.push({ userId: i, filePath: filename });
+    // for (let k = 0; k < ROWS_PER_TABLE_PER_PERSON; k++) {}
+  }
+  files.forEach((e) => {
+    const rawFile = require(e.filePath);
+    e.data = rawFile;
+  });
+  let totalRows = 0;
+  files.forEach((e) => (totalRows += e.data.length));
+  return totalRows;
+};
+
+export const migrateHeartRate = () => {
+  const files: FileByUserId[] = [];
+  for (let i = 1; i < NUM_PERSON_TO_MIGRATE + 1; i++) {
+    const filename = seeding.createFilePath(i, 'heart_rate');
+    files.push({ userId: i, filePath: filename });
+    // for (let k = 0; k < ROWS_PER_TABLE_PER_PERSON; k++) {}
+  }
+  files.forEach((e) => {
+    const rawFile = require(e.filePath);
+    e.data = rawFile;
+  });
+  let totalRows = 0;
+  files.forEach((e) => (totalRows += e.data.length));
+  return totalRows;
+};
+
+// console.log(
+//   `ALL_ROWS => ${
+//     migrateCalories() +
+//     migrateDistance() +
+//     migrateSteps() +
+//     migrateHeartRate() +
+//     migrateVeryActiveMinutes()
+//   }`,
+// );
+
+type Table =
+  | 'Steps'
+  | 'Distance'
+  | 'Calories'
+  | 'HeartRate'
+  | 'VeryActiveMinutes';
+
+async function clearTable(table?: Table) {
+  switch (table) {
+    case 'Calories':
+      await prisma.calories.deleteMany({});
+    case 'Distance':
+      await prisma.distance.deleteMany({});
+    case 'Steps':
+      await prisma.steps.deleteMany({});
+    case 'HeartRate':
+      await prisma.heartRate.deleteMany({});
+    case 'VeryActiveMinutes':
+      await prisma.veryActiveMinutes.deleteMany({});
+    default:
+      await prisma.calories.deleteMany({});
+      await prisma.distance.deleteMany({});
+      await prisma.steps.deleteMany({});
+      await prisma.heartRate.deleteMany({});
+      await prisma.veryActiveMinutes.deleteMany({});
+  }
+}
+
+clearTable();
