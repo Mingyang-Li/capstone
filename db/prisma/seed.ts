@@ -44,23 +44,7 @@ export class Seeding {
 
 const configService = new ConfigService();
 const prisma = new PrismaClient();
-
 const seeding = new Seeding(configService);
-// const fileOpened = seeding.openFileByUserId(1, 'steps');
-// console.log(`len: ${fileOpened.length}`);
-
-// const TABLE_TO_MIGRATE: File = '';
-// const userId = 1;
-// for (let i = 0; i < 5; i++) {
-//   const transformed: CreateStepsArgs = {
-//     dateTime: fileOpened[i].dateTime,
-//     value: fileOpened[i].value,
-//     userId: i + 1,
-//     date: fileOpened[i].dateTime.slice(0, 10),
-//   };
-//   const created = stepsService.createSteps(transformed);
-//   console.log(`${i + 1} => ${JSON.stringify(created)}`);
-// }
 
 const MAX_DB_ROWS = 10000000;
 const NUM_PERSON_TO_MIGRATE = 5;
@@ -68,49 +52,74 @@ const MAX_ROWS_PER_PERSON = 2000000;
 const MAX_ROWS_PER_TABLE_PER_PERSON = 400000;
 const ROWS_PER_TABLE_PER_PERSON = 350000;
 
-export const migrateSteps = () => {
+export async function migrateSteps() {
   const files: FileByUserId[] = [];
   for (let i = 1; i < NUM_PERSON_TO_MIGRATE + 1; i++) {
     const filename = seeding.createFilePath(i, 'steps');
     files.push({ userId: i, filePath: filename });
   }
+  console.log('✔️ Got all steps file paths');
+
   files.forEach((e) => {
     const rawFile = require(e.filePath);
     e.data = rawFile;
   });
+  console.log('✔️ Got all file data');
 
-  files.forEach((e) => {
-    const promises = [];
-    e.data.forEach((item) => {
-      const data: CreateStepsArgs = {
+  files.forEach(async (e) => {
+    console.log(`⌛ => Migrating steps file for person ${e.userId}`);
+
+    const originalData = e.data.map((item) => {
+      const data = {
         dateTime: new Date(item.dateTime),
         date: new Date(item.dateTime),
         value: item.value,
         userId: e.userId,
       };
-      // promises.push(async () => await prisma.steps.create(data));
+      return data;
     });
-    // const resolvedPromises = Promise.all(promises);
+
+    await prisma.steps.createMany({ data: originalData });
+
+    console.log(
+      `✔️ => Completed migrating ${originalData.length} rows of Steps for person ${e.userId}\n`,
+    );
   });
-  let totalRows = 0;
-  files.forEach((e) => (totalRows += e.data.length));
-  return totalRows;
-};
+}
 
 export const migrateCalories = () => {
   const files: FileByUserId[] = [];
   for (let i = 1; i < NUM_PERSON_TO_MIGRATE + 1; i++) {
     const filename = seeding.createFilePath(i, 'calories');
     files.push({ userId: i, filePath: filename });
-    // for (let k = 0; k < ROWS_PER_TABLE_PER_PERSON; k++) {}
   }
+  console.log('✔️ Got all steps file paths');
+
   files.forEach((e) => {
     const rawFile = require(e.filePath);
     e.data = rawFile;
   });
-  let totalRows = 0;
-  files.forEach((e) => (totalRows += e.data.length));
-  return totalRows;
+  console.log('✔️ Got all file data');
+
+  files.forEach(async (e) => {
+    console.log(`⌛ => Migrating calories file for person ${e.userId}`);
+
+    const originalData = e.data.map((item) => {
+      const data = {
+        dateTime: new Date(item.dateTime),
+        date: new Date(item.dateTime),
+        value: item.value,
+        userId: e.userId,
+      };
+      return data;
+    });
+
+    await prisma.calories.createMany({ data: originalData });
+
+    console.log(
+      `✔️ => Completed migrating ${originalData.length} rows of Calories for person ${e.userId}\n`,
+    );
+  });
 };
 
 export const migrateDistance = () => {
@@ -118,15 +127,34 @@ export const migrateDistance = () => {
   for (let i = 1; i < NUM_PERSON_TO_MIGRATE + 1; i++) {
     const filename = seeding.createFilePath(i, 'distance');
     files.push({ userId: i, filePath: filename });
-    // for (let k = 0; k < ROWS_PER_TABLE_PER_PERSON; k++) {}
   }
+  console.log('✔️ Got all steps file paths');
+
   files.forEach((e) => {
     const rawFile = require(e.filePath);
     e.data = rawFile;
   });
-  let totalRows = 0;
-  files.forEach((e) => (totalRows += e.data.length));
-  return totalRows;
+  console.log('✔️ Got all file data');
+
+  files.forEach(async (e) => {
+    console.log(`⌛ => Migrating distance file for person ${e.userId}`);
+
+    const originalData = e.data.map((item) => {
+      const data = {
+        dateTime: new Date(item.dateTime),
+        date: new Date(item.dateTime),
+        value: item.value,
+        userId: e.userId,
+      };
+      return data;
+    });
+
+    await prisma.distance.createMany({ data: originalData });
+
+    console.log(
+      `✔️ => Completed migrating ${originalData.length} rows of Distance for person ${e.userId}\n`,
+    );
+  });
 };
 
 export const migrateVeryActiveMinutes = () => {
@@ -136,13 +164,35 @@ export const migrateVeryActiveMinutes = () => {
     files.push({ userId: i, filePath: filename });
     // for (let k = 0; k < ROWS_PER_TABLE_PER_PERSON; k++) {}
   }
+  console.log('✔️ Got all steps file paths');
+
   files.forEach((e) => {
     const rawFile = require(e.filePath);
     e.data = rawFile;
   });
-  let totalRows = 0;
-  files.forEach((e) => (totalRows += e.data.length));
-  return totalRows;
+  console.log('✔️ Got all file data');
+
+  files.forEach(async (e) => {
+    console.log(
+      `⌛ => Migrating VeryActiveMinutes file for person ${e.userId}`,
+    );
+
+    const originalData = e.data.map((item) => {
+      const data = {
+        dateTime: new Date(item.dateTime),
+        date: new Date(item.dateTime),
+        value: item.value,
+        userId: e.userId,
+      };
+      return data;
+    });
+
+    await prisma.veryActiveMinutes.createMany({ data: originalData });
+
+    console.log(
+      `✔️ => Completed migrating ${originalData.length} rows of VeryActiveMinutes for person ${e.userId}\n`,
+    );
+  });
 };
 
 export const migrateHeartRate = () => {
@@ -161,16 +211,6 @@ export const migrateHeartRate = () => {
   return totalRows;
 };
 
-// console.log(
-//   `ALL_ROWS => ${
-//     migrateCalories() +
-//     migrateDistance() +
-//     migrateSteps() +
-//     migrateHeartRate() +
-//     migrateVeryActiveMinutes()
-//   }`,
-// );
-
 type Table =
   | 'Steps'
   | 'Distance'
@@ -178,7 +218,7 @@ type Table =
   | 'HeartRate'
   | 'VeryActiveMinutes';
 
-async function clearTable(table?: Table) {
+export async function clearTable(table?: Table) {
   switch (table) {
     case 'Calories':
       await prisma.calories.deleteMany({});
@@ -199,4 +239,4 @@ async function clearTable(table?: Table) {
   }
 }
 
-clearTable();
+migrateVeryActiveMinutes();
