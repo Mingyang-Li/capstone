@@ -1,17 +1,20 @@
 import { PrismaClient } from '@prisma/client';
-import { CreateStepsArgs } from 'src/dto/steps';
 import { ConfigService } from './../src/services/Config.service';
-import {
-  CALORIES_TO_ADD,
-  DISTANCE_TO_ADD,
-  HEARTRATE_TO_ADD,
-  VERY_ACTIVE_MINUTES_TO_ADD,
-} from './DemoData';
+import { HEARTRATE_TO_ADD } from './DemoData';
 
-type File = 'calories' | 'disance' | 'steps';
+type File =
+  | 'calories'
+  | 'disance'
+  | 'steps'
+  | 'heart_rate'
+  | 'very_active_minutes';
 
 export class Seeding {
   constructor(private configService: ConfigService) {}
+
+  createFilePath(userId: number, file: File): string {
+    return `${this.configService.PATH_LOCAL_DATASET}/p0${userId}/fitbit/${file}.json`;
+  }
 
   openFileByUserId(userId: number, file: File) {
     const filePath = `${this.configService.PATH_LOCAL_DATASET}/p0${userId}/fitbit/${file}.json`;
@@ -23,10 +26,9 @@ export class Seeding {
 }
 
 const configService = new ConfigService();
-const prisma = new PrismaClient();
-// const stepsService = new StepsService(prismaService);
+// const prisma = new PrismaClient();
 
-// const seeding = new Seeding(configService);
+const seeding = new Seeding(configService);
 // const fileOpened = seeding.openFileByUserId(1, 'steps');
 // console.log(`len: ${fileOpened.length}`);
 
@@ -43,15 +45,30 @@ const prisma = new PrismaClient();
 //   console.log(`${i + 1} => ${JSON.stringify(created)}`);
 // }
 
-// Test seeded:
-// 1. Steps
-// 2. Distance
-// 3. Calories
-// 4. VeryActiveMinutes
-// 5. HeartRate - TBD
+const MAX_DB_ROWS = 10000000;
+const NUM_PERSON_TO_MIGRATE = 5;
+const MAX_ROWS_PER_PERSON = 2000000;
+const MAX_ROWS_PER_TABLE_PER_PERSON = 400000;
+const ROWS_PER_TABLE_PER_PERSON = 350000;
+export const migrateSteps = () => {
+  for (let i = 0; i < NUM_PERSON_TO_MIGRATE; i++) {
+    const FILE_STEPS = seeding.createFilePath(i, 'steps');
+    const FILE_DISTANCE = seeding.createFilePath(i, 'disance');
+    const FILE_CALORIES = seeding.createFilePath(i, 'calories');
+    const FILE_HEARTRATE = seeding.createFilePath(i, 'heart_rate');
+    const FILE_VERYACTIVEMINUTES = seeding.createFilePath(
+      i,
+      'very_active_minutes',
+    );
+    console.table({
+      FILE_STEPS,
+      FILE_CALORIES,
+      FILE_DISTANCE,
+      FILE_HEARTRATE,
+      FILE_VERYACTIVEMINUTES,
+    });
+    // for (let k = 0; k < ROWS_PER_TABLE_PER_PERSON; k++) {}
+  }
+};
 
-const seedHeartRate = HEARTRATE_TO_ADD.map(
-  async (e) => await prisma.heartRate.create({ data: e }),
-);
-const promisedHeartRate = Promise.all(seedHeartRate);
-console.log(promisedHeartRate);
+migrateSteps();
