@@ -1,12 +1,52 @@
+export interface HeartRate {
+  // original
+  dateTime: Date;
+  bpm: number;
+  confidence: number;
+
+  //additional
+  date: Date;
+  userId: number;
+}
+
 export interface Calories {
+  //original
   dateTime: Date;
   value: number;
+
+  //additional
+  date: Date;
+  userId: number;
 }
 
 export interface Distance {
+  //original
   dateTime: Date;
-  date: Date; // auto-mapped to yyyy-mm-dd format in DB
   value: number;
+
+  //additional
+  date: Date;
+  userId: number;
+}
+
+export interface Steps {
+  //original
+  dateTime: Date;
+  value: number;
+
+  //additional
+  date: Date;
+  userId: number;
+}
+
+export interface VeryActiveMinutes {
+  //original
+  dateTime: Date;
+  value: number;
+
+  //additional
+  date: Date;
+  userId: number;
 }
 
 export interface ActivityLevel {
@@ -53,11 +93,6 @@ export interface Exercise {
 export interface HeartRateValue {
   bpm: number;
   confidence: number;
-}
-
-export interface HeartRate {
-  dateTime: Date;
-  value: HeartRateValue;
 }
 
 export interface LightlyActiveMinutes {
@@ -159,11 +194,6 @@ export interface Sleep {
   mainSleep: boolean;
 }
 
-export interface Steps {
-  dateTime: Date;
-  value: number;
-}
-
 export interface TimeInHeartRateZonesValue {
   valuesInZones: TimeInHeartRateZonesValuesInZones;
 }
@@ -178,9 +208,4 @@ export interface TimeInHeartRateZonesValuesInZones {
 export interface TimeInHeartRateZones {
   dateTime: Date;
   value: TimeInHeartRateZonesValue;
-}
-
-export interface VeryActiveMinutes {
-  dateTime: Date;
-  value: number;
 }
