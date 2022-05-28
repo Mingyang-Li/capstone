@@ -9,9 +9,20 @@ type File =
   | 'heart_rate'
   | 'very_active_minutes';
 
+interface HeartRateValue {
+  bpm?: number;
+  confidence?: number;
+}
+
+interface RawData {
+  dateTime: string;
+  value?: number | HeartRateValue;
+}
+
 interface FileByUserId {
   userId: number;
   filePath: string;
+  data?: Array<RawData>;
 }
 
 export class Seeding {
@@ -55,14 +66,19 @@ const NUM_PERSON_TO_MIGRATE = 5;
 const MAX_ROWS_PER_PERSON = 2000000;
 const MAX_ROWS_PER_TABLE_PER_PERSON = 400000;
 const ROWS_PER_TABLE_PER_PERSON = 350000;
+
 export const migrateSteps = () => {
   const files: FileByUserId[] = [];
   for (let i = 1; i < NUM_PERSON_TO_MIGRATE + 1; i++) {
     const filename = seeding.createFilePath(i, 'steps');
     files.push({ userId: i, filePath: filename });
-    // for (let k = 0; k < ROWS_PER_TABLE_PER_PERSON; k++) {}
   }
-  console.table(files);
+  files.forEach((e) => {
+    // eslint-disable-next-line @typescript-eslint/no-var-requires
+    const rawFile = require(e.filePath);
+    e.data = rawFile;
+  });
+  files.forEach((e) => console.log(`len: ${JSON.stringify(e.data[0])}`));
 };
 
 export const migrateCalories = () => {
@@ -72,5 +88,12 @@ export const migrateCalories = () => {
     files.push({ userId: i, filePath: filename });
     // for (let k = 0; k < ROWS_PER_TABLE_PER_PERSON; k++) {}
   }
-  console.table(files);
+  files.forEach((e) => {
+    // eslint-disable-next-line @typescript-eslint/no-var-requires
+    const rawFile = require(e.filePath);
+    e.data = rawFile;
+  });
+  files.forEach((e) => console.log(`len: ${JSON.stringify(e.data[0])}`));
 };
+
+migrateCalories();
