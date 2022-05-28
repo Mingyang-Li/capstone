@@ -1,7 +1,12 @@
 import { PrismaClient } from '@prisma/client';
 import { CreateStepsArgs } from 'src/dto/steps';
 import { ConfigService } from './../src/services/Config.service';
-import { CALORIES_TO_ADD, DISTANCE_TO_ADD } from './DemoData';
+import {
+  CALORIES_TO_ADD,
+  DISTANCE_TO_ADD,
+  HEARTRATE_TO_ADD,
+  VERY_ACTIVE_MINUTES_TO_ADD,
+} from './DemoData';
 
 type File = 'calories' | 'disance' | 'steps';
 
@@ -41,9 +46,12 @@ const prisma = new PrismaClient();
 // Test seeded:
 // 1. Steps
 // 2. Distance
+// 3. Calories
+// 4. VeryActiveMinutes
+// 5. HeartRate - TBD
 
-const seedCalories = CALORIES_TO_ADD.map(
-  async (e) => await prisma.calories.create({ data: e }),
+const seedHeartRate = HEARTRATE_TO_ADD.map(
+  async (e) => await prisma.heartRate.create({ data: e }),
 );
-const promisedSeedCalories = Promise.all(seedCalories);
-console.log(promisedSeedCalories);
+const promisedHeartRate = Promise.all(seedHeartRate);
+console.log(promisedHeartRate);

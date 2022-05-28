@@ -1,5 +1,5 @@
 import { PrismaClient } from '@prisma/client';
-import { CALORIES_TO_ADD } from './DemoData';
+import { CALORIES_TO_ADD } from '../DemoData';
 
 const prisma = new PrismaClient();
 const seedCalories = CALORIES_TO_ADD.map(

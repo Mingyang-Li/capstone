@@ -1,3 +1,4 @@
+import { CreateHeartRateArgs } from 'src/dto/heartRate';
 import { CreateStepsArgs } from 'src/dto/steps';
 
 export const STEPS_TO_ADD: CreateStepsArgs[] = [
@@ -132,35 +133,40 @@ export const VERY_ACTIVE_MINUTES_TO_ADD: CreateStepsArgs[] = [
   },
 ];
 
-export const HEARTRATE_TO_ADD: CreateStepsArgs[] = [
+export const HEARTRATE_TO_ADD: CreateHeartRateArgs[] = [
   {
     dateTime: new Date(),
     date: new Date(),
-    value: 100,
+    bpm: 100,
+    confidence: 100.4,
     userId: 1,
   },
   {
     dateTime: new Date(),
     date: new Date(),
-    value: 200,
-    userId: 1,
+    bpm: 100,
+    confidence: 100.4,
+    userId: 2,
   },
   {
     dateTime: new Date(),
     date: new Date(),
-    value: 300,
-    userId: 1,
+    bpm: 100,
+    confidence: 100.4,
+    userId: 3,
   },
   {
     dateTime: new Date(),
     date: new Date(),
-    value: 400,
-    userId: 1,
+    bpm: 100,
+    confidence: 100.4,
+    userId: 4,
   },
   {
     dateTime: new Date(),
     date: new Date(),
-    value: 500,
-    userId: 1,
+    bpm: 100,
+    confidence: 100.4,
+    userId: 5,
   },
 ];
