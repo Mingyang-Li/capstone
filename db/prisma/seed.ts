@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
 import { PrismaClient } from '@prisma/client';
-import { CreateStepsArgs } from 'src/dto/steps';
+import { CreateHeartRateArgs } from 'src/dto/heartRate';
 import { ConfigService } from './../src/services/Config.service';
 
 type File =
@@ -18,6 +18,17 @@ export interface HeartRateValue {
 interface RawData {
   dateTime: string;
   value?: number;
+}
+
+interface HeartRate {
+  dateTime: string;
+  value: HeartRateValue;
+}
+
+interface FileByUserId_HeartRate {
+  userId: number;
+  filePath: string;
+  data?: Array<HeartRate>;
 }
 
 interface FileByUserId {
@@ -196,19 +207,39 @@ export const migrateVeryActiveMinutes = () => {
 };
 
 export const migrateHeartRate = () => {
-  const files: FileByUserId[] = [];
+  const files: FileByUserId_HeartRate[] = [];
   for (let i = 1; i < NUM_PERSON_TO_MIGRATE + 1; i++) {
     const filename = seeding.createFilePath(i, 'heart_rate');
     files.push({ userId: i, filePath: filename });
-    // for (let k = 0; k < ROWS_PER_TABLE_PER_PERSON; k++) {}
   }
+  console.log('✔️ Got all HeartRate file paths');
+
   files.forEach((e) => {
     const rawFile = require(e.filePath);
     e.data = rawFile;
   });
-  let totalRows = 0;
-  files.forEach((e) => (totalRows += e.data.length));
-  return totalRows;
+  console.log('✔️ Got all file data');
+
+  files.forEach(async (e) => {
+    console.log(`⌛ => Migrating HeartRate file for person ${e.userId}`);
+
+    const originalData = e.data.map((item) => {
+      const data: CreateHeartRateArgs = {
+        dateTime: new Date(item.dateTime),
+        date: new Date(item.dateTime),
+        bpm: item.value.bpm,
+        confidence: item.value.confidence,
+        userId: e.userId,
+      };
+      return data;
+    });
+
+    await prisma.distance.createMany({ data: originalData });
+
+    console.log(
+      `✔️ => Completed migrating ${originalData.length} rows of HeartRate for person ${e.userId}\n`,
+    );
+  });
 };
 
 type Table =
@@ -239,4 +270,4 @@ export async function clearTable(table?: Table) {
   }
 }
 
-migrateVeryActiveMinutes();
+migrateHeartRate();

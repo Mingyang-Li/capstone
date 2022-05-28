@@ -49,7 +49,7 @@ model HeartRate {
   dateTime   DateTime? @db.Timestamptz(6)
   bpm        Decimal?  @db.Decimal
   confidence Decimal?  @db.Decimal
-  date       DateTime? @db.Timestamp(6)
+  date       DateTime? @db.Date
   userId     Int?
   User       User?     @relation(fields: [userId], references: [id], onDelete: Restrict, onUpdate: Restrict)
 }
