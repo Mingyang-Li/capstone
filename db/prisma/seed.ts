@@ -1,7 +1,7 @@
-import { PrismaService } from 'src/services/Prisma.service';
+import { PrismaClient } from '@prisma/client';
 import { CreateStepsArgs } from 'src/dto/steps';
-import { StepsService } from 'src/services/Step.service';
 import { ConfigService } from './../src/services/Config.service';
+import { CALORIES_TO_ADD, DISTANCE_TO_ADD } from './DemoData';
 
 type File = 'calories' | 'disance' | 'steps';
 
@@ -18,22 +18,32 @@ export class Seeding {
 }
 
 const configService = new ConfigService();
-const prismaService = new PrismaService();
-const stepsService = new StepsService(prismaService);
+const prisma = new PrismaClient();
+// const stepsService = new StepsService(prismaService);
 
-const seeding = new Seeding(configService);
-const fileOpened = seeding.openFileByUserId(1, 'steps');
+// const seeding = new Seeding(configService);
+// const fileOpened = seeding.openFileByUserId(1, 'steps');
 // console.log(`len: ${fileOpened.length}`);
 
 // const TABLE_TO_MIGRATE: File = '';
 // const userId = 1;
-for (let i = 0; i < 5; i++) {
-  const transformed: CreateStepsArgs = {
-    dateTime: fileOpened[i].dateTime,
-    value: fileOpened[i].value,
-    userId: i + 1,
-    date: fileOpened[i].dateTime.slice(0, 10),
-  };
-  const created = stepsService.createSteps(transformed);
-  console.log(`${i + 1} => ${JSON.stringify(created)}`);
-}
+// for (let i = 0; i < 5; i++) {
+//   const transformed: CreateStepsArgs = {
+//     dateTime: fileOpened[i].dateTime,
+//     value: fileOpened[i].value,
+//     userId: i + 1,
+//     date: fileOpened[i].dateTime.slice(0, 10),
+//   };
+//   const created = stepsService.createSteps(transformed);
+//   console.log(`${i + 1} => ${JSON.stringify(created)}`);
+// }
+
+// Test seeded:
+// 1. Steps
+// 2. Distance
+
+const seedCalories = CALORIES_TO_ADD.map(
+  async (e) => await prisma.calories.create({ data: e }),
+);
+const promisedSeedCalories = Promise.all(seedCalories);
+console.log(promisedSeedCalories);

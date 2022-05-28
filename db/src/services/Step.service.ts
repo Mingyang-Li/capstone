@@ -1,11 +1,11 @@
+import { PrismaClient } from '@prisma/client';
 import { CreateStepsArgs } from './../dto/steps';
-import { PrismaService } from './Prisma.service';
 
 export class StepsService {
-  constructor(private prismaService: PrismaService) {}
+  constructor(private primma: PrismaClient) {}
 
   async createSteps(param: CreateStepsArgs): Promise<any> {
-    return this.prismaService.steps.create({
+    return this.primma.steps.create({
       data: {
         dateTime: param.dateTime,
         value: param.value,

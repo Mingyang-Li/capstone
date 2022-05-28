@@ -2,10 +2,6 @@ generator client {
   provider = "prisma-client-js"
 }
 
-generator prismaClassGenerator {
-  provider = "prisma-class-generator"
-}
-
 datasource db {
   provider = "postgresql"
   url      = env("DB_URL")
@@ -43,9 +39,9 @@ model Calories {
   id       Int       @id @default(autoincrement())
   dateTime DateTime? @db.Timestamp(6)
   value    Decimal?  @db.Decimal
-  userId   Int
+  userId   Int?
   date     DateTime? @db.Date
-  User     User      @relation(fields: [userId], references: [id], onUpdate: Restrict)
+  User     User?     @relation(fields: [userId], references: [id], onDelete: Restrict, onUpdate: Restrict)
 }
 
 model HeartRate {

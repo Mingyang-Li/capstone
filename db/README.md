@@ -29,7 +29,7 @@ $ yarn start:prod
 
 ```bash
 # Every time our remote PostgreSQL DB is updated, we need to introspect the latest schema then apply it to our schema.prisma file
-$ npx db pull
+$ npx prisma db pull
 
 # Once we have the latest schema.prisma (local schema is in sync with remote DB schema), we need to generate a new prisma client that works in collaboration with the latest schema. Therefore, we need to run the following command
 $ npx prisma generate
@@ -38,5 +38,5 @@ $ npx prisma generate
 ### Run migration script
 
 ```bash
-npx prisma seed
+npx prisma db seed
 ```
