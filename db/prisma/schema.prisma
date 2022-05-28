@@ -57,7 +57,7 @@ model HeartRate {
 model VeryActiveMinutes {
   id       Int       @id @default(autoincrement())
   dateTime DateTime? @db.Timestamptz(6)
-  date     DateTime? @db.Timestamp(6)
+  date     DateTime? @db.Date
   value    Decimal?  @db.Decimal
   userId   Int?
   User     User?     @relation(fields: [userId], references: [id], onDelete: Restrict, onUpdate: Restrict)
