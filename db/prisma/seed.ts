@@ -4,10 +4,15 @@ import { HEARTRATE_TO_ADD } from './DemoData';
 
 type File =
   | 'calories'
-  | 'disance'
+  | 'distance'
   | 'steps'
   | 'heart_rate'
   | 'very_active_minutes';
+
+interface FileByUserId {
+  userId: number;
+  filePath: string;
+}
 
 export class Seeding {
   constructor(private configService: ConfigService) {}
@@ -51,24 +56,21 @@ const MAX_ROWS_PER_PERSON = 2000000;
 const MAX_ROWS_PER_TABLE_PER_PERSON = 400000;
 const ROWS_PER_TABLE_PER_PERSON = 350000;
 export const migrateSteps = () => {
-  for (let i = 0; i < NUM_PERSON_TO_MIGRATE; i++) {
-    const FILE_STEPS = seeding.createFilePath(i, 'steps');
-    const FILE_DISTANCE = seeding.createFilePath(i, 'disance');
-    const FILE_CALORIES = seeding.createFilePath(i, 'calories');
-    const FILE_HEARTRATE = seeding.createFilePath(i, 'heart_rate');
-    const FILE_VERYACTIVEMINUTES = seeding.createFilePath(
-      i,
-      'very_active_minutes',
-    );
-    console.table({
-      FILE_STEPS,
-      FILE_CALORIES,
-      FILE_DISTANCE,
-      FILE_HEARTRATE,
-      FILE_VERYACTIVEMINUTES,
-    });
+  const files: FileByUserId[] = [];
+  for (let i = 1; i < NUM_PERSON_TO_MIGRATE + 1; i++) {
+    const filename = seeding.createFilePath(i, 'steps');
+    files.push({ userId: i, filePath: filename });
     // for (let k = 0; k < ROWS_PER_TABLE_PER_PERSON; k++) {}
   }
+  console.table(files);
 };
 
-migrateSteps();
+export const migrateCalories = () => {
+  const files: FileByUserId[] = [];
+  for (let i = 1; i < NUM_PERSON_TO_MIGRATE + 1; i++) {
+    const filename = seeding.createFilePath(i, 'calories');
+    files.push({ userId: i, filePath: filename });
+    // for (let k = 0; k < ROWS_PER_TABLE_PER_PERSON; k++) {}
+  }
+  console.table(files);
+};
