@@ -3,7 +3,7 @@ generator client {
 }
 
 generator prismaClassGenerator {
-    provider = "prisma-class-generator"
+  provider = "prisma-class-generator"
 }
 
 datasource db {
@@ -30,8 +30,39 @@ model Steps {
 }
 
 model User {
-  id       Int        @id @default(autoincrement())
-  auth0Id  String?
-  Distance Distance[]
-  Steps    Steps[]
+  id                Int                 @id @default(autoincrement())
+  auth0Id           String?
+  Calories          Calories[]
+  Distance          Distance[]
+  HeartRate         HeartRate[]
+  Steps             Steps[]
+  VeryActiveMinutes VeryActiveMinutes[]
+}
+
+model Calories {
+  id       Int       @id @default(autoincrement())
+  dateTime DateTime? @db.Timestamp(6)
+  value    Decimal?  @db.Decimal
+  userId   Int
+  date     DateTime? @db.Date
+  User     User      @relation(fields: [userId], references: [id], onUpdate: Restrict)
+}
+
+model HeartRate {
+  id         Int       @id @default(autoincrement())
+  dateTime   DateTime? @db.Timestamptz(6)
+  bpm        Decimal?  @db.Decimal
+  confidence Decimal?  @db.Decimal
+  date       DateTime? @db.Timestamp(6)
+  userId     Int?
+  User       User?     @relation(fields: [userId], references: [id], onDelete: Restrict, onUpdate: Restrict)
+}
+
+model VeryActiveMinutes {
+  id       Int       @id @default(autoincrement())
+  dateTime DateTime? @db.Timestamptz(6)
+  date     DateTime? @db.Timestamp(6)
+  value    Decimal?  @db.Decimal
+  userId   Int?
+  User     User?     @relation(fields: [userId], references: [id], onDelete: Restrict, onUpdate: Restrict)
 }
