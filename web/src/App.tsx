@@ -1,11 +1,11 @@
 import React from 'react';
-import LoginButton from './components/auth/LoginButton';
+import AuthenticationButton from './components/auth/AuthenticationButton';
 
 function App() {
   return (
     <div className="App">
       App
-      <LoginButton />
+      <AuthenticationButton />
     </div>
   );
 }
