@@ -1,5 +1,6 @@
 import React from 'react';
 import { Navigate } from "react-router-dom";
+import { RequireAuth } from '../components/auth/RequireAuth';
 import { Dashboard } from '../pages/Dashboard';
 import { Login } from '../pages/Login';
 
@@ -15,10 +16,10 @@ export const routes: IRoute[] = [
     },
     {
         path: '/dashboard',
-        component: <Dashboard />,
+        component: (<RequireAuth props={<Dashboard />} />),
     },
     {
-        path: '/',
+        path: '*',
         component: <Navigate to="/login" replace />,
     },
 ]

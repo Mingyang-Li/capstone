@@ -5,8 +5,7 @@ export const useLogin = () => {
   const navigate = useNavigate();
   const { loginWithRedirect } = useAuth0();
   const login = () => {
-    loginWithRedirect();
-    navigate('/dashboard');
+    loginWithRedirect().then(() => navigate("/dashboard"))
   };
   return [login];
 }
