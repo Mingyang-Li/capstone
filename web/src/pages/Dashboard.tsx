@@ -3,7 +3,7 @@ import { useEffect } from "react";
 import Loading from "../components/Loading";
 import CaloriesByDate from "../components/reports/caloriesByDate/CaloriesByDate";
 import AppContainer from "../stories/appContainer/AppContainer";
-import { ChartContainer } from "../stories/appContainer/ChartContainer";
+import { ChartContainer } from "../stories/chartContainer/ChartContainer";
 import AreaChart from "../stories/charts/areaChart/AreaChart";
 import { Forbidden } from "./Forbidden";
 

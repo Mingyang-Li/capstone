@@ -2,7 +2,7 @@ import { useQuery, useReactiveVar } from "@apollo/client";
 import { useAuth0 } from "@auth0/auth0-react";
 import { CALORIES_BY_DATE } from "../../../graphql/Queries";
 import { startDateVar, endDateVar } from "../../../graphql/Store";
-import { ChartContainer } from "../../../stories/appContainer/ChartContainer";
+import { ChartContainer } from "../../../stories/chartContainer/ChartContainer";
 import AreaChart from "../../../stories/charts/areaChart/AreaChart";
 
 const CaloriesByDate: React.FC = () => {

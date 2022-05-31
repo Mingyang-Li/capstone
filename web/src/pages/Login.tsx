@@ -50,10 +50,7 @@ export const Login: React.FC = () => {
               <LockOutlinedIcon />
             </Avatar>
             <Typography component="h1" variant="h5">
-              UoA Capstone Project
-            </Typography>
-            <Typography component="h2" variant="h5">
-              2022-S1 Team 2
+              HealthKit
             </Typography>
             <Box component="form" noValidate sx={{ mt: 1 }}>
               <AuthenticationButton />
