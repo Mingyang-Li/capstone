@@ -3,7 +3,7 @@ import { Auth0ProviderWithHistory } from "./components/auth/Auth0ProviderWithHis
 import { routes } from "./router/Routes";
 import { ConfigService } from "./services/Config.service";
 import { ApolloProvider, ApolloClient, HttpLink } from "@apollo/client";
-import { InMemoryCache } from "@auth0/auth0-react";
+import { Store } from "./graphql/Store";
 
 const App = () => {
   const client = new ApolloClient({
@@ -13,7 +13,7 @@ const App = () => {
         Authorization: `Bearer ${ConfigService.REACT_APP_HASURA_ADMIN_SECRET}`,
       },
     }),
-    cache: new InMemoryCache() as any,
+    cache: Store,
   });
   return (
     <ApolloProvider client={client}>
