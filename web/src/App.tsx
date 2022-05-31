@@ -1,8 +1,8 @@
-import { Routes, Route, Router, BrowserRouter } from "react-router-dom";
+import { Routes, Route, BrowserRouter } from "react-router-dom";
 import { Auth0ProviderWithHistory } from "./components/auth/Auth0ProviderWithHistory";
 import { routes } from "./router/Routes";
 
-function App() {
+const App = () => {
   return (
     <BrowserRouter>
       <Auth0ProviderWithHistory>
@@ -14,6 +14,6 @@ function App() {
       </Auth0ProviderWithHistory>
     </BrowserRouter>
   );
-}
+};
 
 export default App;

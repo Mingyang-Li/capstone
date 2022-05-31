@@ -10,7 +10,7 @@ export const Auth0ProviderWithHistory = ({ children }: any) => {
     navigate(
       appState && appState.targetUrl
         ? appState.targetUrl
-        : (window.location.href = "http://localhost:3000/dashboard")
+        : window.location.pathname
     );
   };
 
@@ -19,7 +19,7 @@ export const Auth0ProviderWithHistory = ({ children }: any) => {
       domain={ConfigService.REACT_APP_AUTH0_DOMAIN}
       clientId={ConfigService.REACT_APP_AUTH0_CLIENT_ID}
       audience={ConfigService.REACT_APP_AUTH0_AUDIENCE}
-      redirectUri={window.location.origin}
+      redirectUri={`${window.location.origin}/dashboard`}
       onRedirectCallback={onRedirectCallback}
     >
       {children}
