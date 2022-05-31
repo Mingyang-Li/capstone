@@ -10,7 +10,8 @@ const App = () => {
     link: new HttpLink({
       uri: ConfigService.REACT_APP_API_URL,
       headers: {
-        Authorization: `Bearer ${ConfigService.REACT_APP_HASURA_ADMIN_SECRET}`,
+        "content-type": "application/json",
+        "x-hasura-admin-secret": ConfigService.REACT_APP_HASURA_ADMIN_SECRET,
       },
     }),
     cache: Store,

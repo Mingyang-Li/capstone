@@ -1,10 +1,11 @@
 import { makeVar, InMemoryCache } from "@apollo/client";
 
-// set start date as 30 days before "today"
-const s = new Date(Date.now() - 30 * 24 * 60 * 60 * 1000);
-export const endDateVar = makeVar(new Date().toString());
-export const startDateVar = makeVar(s.toString());
-export const minDateVar = makeVar(new Date("2019-10-30"));
+// set start date as 2019-10-30 - var also used in datepickers
+export const minDate = new Date("2019-10-30");
+export const startDateVar = makeVar(minDate);
+
+// default end date to be the month after
+export const endDateVar = makeVar(new Date("2019-11-30"));
 
 export const Store = new InMemoryCache({
   typePolicies: {
@@ -20,9 +21,9 @@ export const Store = new InMemoryCache({
             return endDateVar();
           },
         },
-        minDate: {
+        userId: {
           read() {
-            return minDateVar();
+            return;
           },
         },
       },
