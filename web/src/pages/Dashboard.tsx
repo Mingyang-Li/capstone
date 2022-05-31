@@ -2,6 +2,7 @@ import { useAuth0 } from "@auth0/auth0-react";
 import { useEffect } from "react";
 import LogoutButton from "../components/auth/LogoutButton";
 import Loading from "../components/Loading";
+import AppContainer from "../stories/appContainer/AppContainer";
 import { Forbidden } from "./Forbidden";
 
 export const Dashboard: React.FC = () => {
@@ -15,7 +16,7 @@ export const Dashboard: React.FC = () => {
     <>
       <h2>DashboardPage</h2>
       <h3>isAuthenticated: {isAuthenticated}</h3>
-      <LogoutButton />
+      <AppContainer title="Dashboard" contents={<LogoutButton />} />
     </>
   );
 };
