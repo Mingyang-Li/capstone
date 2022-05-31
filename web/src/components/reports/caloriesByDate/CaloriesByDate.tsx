@@ -10,13 +10,13 @@ const CaloriesByDate: React.FC = () => {
   const s = useReactiveVar(startDateVar);
   const e = useReactiveVar(endDateVar);
 
-  const email = user?.email;
+  const userId = user?.email ? user?.email[13] : 1;
 
   const startDate = s;
   const endDate = e;
 
   const { data, loading } = useQuery(CALORIES_BY_DATE, {
-    variables: { userId: email ? email[13] : 1, startDate, endDate },
+    variables: { userId, startDate, endDate },
   });
 
   const d = data?.CALORIES_BY_DATE;
