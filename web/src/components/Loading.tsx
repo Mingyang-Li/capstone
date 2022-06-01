@@ -13,7 +13,7 @@ const Loading = () => (
       verticalAlign: "baseline",
     }}
   >
-    <img src={loadingImg} alt="Loading..." />
+    <img src={loadingImg} alt="Loading..." style={{ top: "45%" }} />
   </div>
 );
 
