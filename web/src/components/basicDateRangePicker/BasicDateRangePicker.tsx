@@ -7,6 +7,7 @@ import Box from '@mui/material/Box';
 import { useReactiveVar } from '@apollo/client';
 import { startDateVar, endDateVar } from '../../graphql/Store';
 import { Stack } from '@mui/material';
+import { DateInputProps } from '@mui/x-date-pickers/internals';
 
 export default function BasicDateRangePicker() {
   const s = useReactiveVar(startDateVar);
@@ -23,14 +24,14 @@ export default function BasicDateRangePicker() {
 
   // Updates global date-range store => all reports using global date-range will update
   const applyDateRangeFilter = () => {
-    // startDateVar(value[0]?.toString());
-    // endDateVar(value[1]?.toString());
+    startDateVar(value[0] as Date);
+    endDateVar(value[1] as Date);
   };
 
   // checks whether need to enable filter button
   // Only enable (return true) when local state is not the same as reactiveVars
   const checkToDisable = () => {
-    // return value[0]?.toString() === s && value[1]?.toString() === e;
+    return value[0] === s && value[1] === e;
   };
   const disabled = checkToDisable();
 
@@ -38,6 +39,7 @@ export default function BasicDateRangePicker() {
     <Stack direction="row" spacing={2}>
       <LocalizationProvider dateAdapter={AdapterDateFns}>
       <DateRangePicker
+        minDate={new Date("2019-10-30")}
         startText="Start date"
         endText="End date"
         value={value}
@@ -54,13 +56,13 @@ export default function BasicDateRangePicker() {
       />
     </LocalizationProvider>
     <button
-        // className={
-        //   !disabled
-        //     ? 'h-12 px-6 text-indigo-100 transition-colors duration-350 bg-green-600 rounded-lg focus:shadow-outline hover:bg-yellow-500'
-        //     : 'h-12 px-6 text-indigo-100 bg-gray-500 rounded-lg focus:shadow-outline'
-        // }
+        className={
+          !disabled
+            ? 'h-12 px-6 text-indigo-100 transition-colors duration-350 bg-green-600 rounded-lg focus:shadow-outline hover:bg-yellow-500'
+            : 'h-12 px-6 text-indigo-100 bg-gray-500 rounded-lg focus:shadow-outline'
+        }
         onClick={applyDateRangeFilter}
-        // disabled={disabled}
+        disabled={disabled}
       >
         Apply filter
       </button>

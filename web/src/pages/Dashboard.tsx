@@ -21,6 +21,7 @@ const Contents: React.FC = () => {
       <h2>DashboardPage</h2>
       <h3>isAuthenticated: {isAuthenticated}</h3>
       <BasicDateRangePicker />
+      <br></br>
       <CaloriesByDate />
     </>
   );
