@@ -1,5 +1,6 @@
 import ReactApexChart from "react-apexcharts";
 import { ChartProps } from "../../../dto/Charts.dto";
+import Loading from '../../../components/Loading';
 
 const demoSeries = [
   {
@@ -32,15 +33,8 @@ const demoOptions = {
 };
 
 const AreaChart: React.FC<ChartProps> = (props: ChartProps) => {
-  if (!props) {
-    return (
-      <ReactApexChart
-        options={demoOptions}
-        series={demoSeries}
-        height={350}
-        type="area"
-      />
-    );
+  if (!props || props.loading) {
+    return <Loading />
   }
   const series = [{
     name: 'Calories',

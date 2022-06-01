@@ -7,7 +7,6 @@ import Box from '@mui/material/Box';
 import { useReactiveVar } from '@apollo/client';
 import { startDateVar, endDateVar } from '../../graphql/Store';
 import { Stack } from '@mui/material';
-import { DateInputProps } from '@mui/x-date-pickers/internals';
 
 export default function BasicDateRangePicker() {
   const s = useReactiveVar(startDateVar);
