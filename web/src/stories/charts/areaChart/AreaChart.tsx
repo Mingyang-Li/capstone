@@ -2,7 +2,7 @@ import ReactApexChart from "react-apexcharts";
 import { ChartProps } from "../../../dto/Charts.dto";
 import Loading from '../../../components/Loading';
 
-const demoSeries = [
+export const demoSeries = [
   {
     name: "series1",
     data: [31, 40, 28, 51, 42, 109, 100],
@@ -12,7 +12,7 @@ const demoSeries = [
     data: [11, 32, 45, 32, 34, 52, 41],
   },
 ];
-const demoOptions = {
+export const demoOptions = {
   chart: {
     height: 370,
   },
