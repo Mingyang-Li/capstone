@@ -7,6 +7,7 @@ import Box from '@mui/material/Box';
 import { useReactiveVar } from '@apollo/client';
 import { startDateVar, endDateVar } from '../../graphql/Store';
 import { Stack } from '@mui/material';
+import { addDays } from 'date-fns';
 
 export default function BasicDateRangePicker() {
   const s = useReactiveVar(startDateVar);
@@ -16,19 +17,15 @@ export default function BasicDateRangePicker() {
     new Date(e),
   ]);
 
-  // Only update UI date range display - not updating global date range
   const updateDateRange = (dateRange: any) => {
     setValue(dateRange);
   };
 
-  // Updates global date-range store => all reports using global date-range will update
   const applyDateRangeFilter = () => {
-    startDateVar(value[0] as Date);
-    endDateVar(value[1] as Date);
+    startDateVar(addDays(value[0] as Date, 1));
+    endDateVar(addDays(value[1] as Date, 1));
   };
 
-  // checks whether need to enable filter button
-  // Only enable (return true) when local state is not the same as reactiveVars
   const checkToDisable = () => {
     return value[0] === s && value[1] === e;
   };

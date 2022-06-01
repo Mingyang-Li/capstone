@@ -173,7 +173,6 @@ export const migrateVeryActiveMinutes = () => {
   for (let i = 1; i < NUM_PERSON_TO_MIGRATE + 1; i++) {
     const filename = seeding.createFilePath(i, 'very_active_minutes');
     files.push({ userId: i, filePath: filename });
-    // for (let k = 0; k < ROWS_PER_TABLE_PER_PERSON; k++) {}
   }
   console.log('✔️ Got all steps file paths');
 
