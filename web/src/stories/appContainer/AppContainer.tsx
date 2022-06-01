@@ -16,10 +16,7 @@ import ListItemButton from "@mui/material/ListItemButton";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
 import PeopleAltIcon from "@mui/icons-material/PeopleAlt";
-import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import LogoutIcon from "@mui/icons-material/Logout";
-import { useNavigate } from "react-router-dom";
-import { useEffect } from "react";
 import { useAuth0 } from "@auth0/auth0-react";
 
 const drawerWidth = 240;
@@ -191,7 +188,7 @@ const AppContainer: React.FC<IAppContainer> = ({ title, contents }) => {
           </ListItemButton>
         </List>
       </Drawer>
-      <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
+      <Box component="main" sx={{ flexGrow: 1, p: 3 }} style={{ height: "95vh" }}>
         <DrawerHeader />
         {contents}
       </Box>
