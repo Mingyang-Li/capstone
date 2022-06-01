@@ -2,9 +2,10 @@ module.exports = {
   schema: [
     {
       "https://capstone.hasura.app/v1/graphql": {
-        headers: {
-          Authorization: "Bearer " + process.env.REACT_APP_HASURA_ADMIN_SECRET,
-        },
+        "headers": {
+          "x-hasura-role": "admin",
+          "x-hasura-admin-secret": process.env.REACT_APP_HASURA_ADMIN_SECRET
+        }
       },
     },
   ],

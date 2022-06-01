@@ -1,0 +1,9 @@
+query {
+  Distance(where: {
+    userId: {
+      _eq: 1
+    }
+  }) {
+    id
+  }
+}

@@ -1,0 +1,15 @@
+overwrite: true
+schema:
+  YOUR_API_URL_WITHOUT_QUOTES:
+    headers: 
+      'x-hasura-admin-secret': YOUR_ADMIN_SECRET_WITHOUT_QUOTES
+documents: "src/**/*.graphql"
+generates:
+  src/generated/graphql.ts:
+    plugins:
+      - "typescript"
+      - "typescript-operations"
+      - "typescript-react-apollo"
+  ./graphql.schema.json:
+    plugins:
+      - "introspection"
