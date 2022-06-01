@@ -1,5 +1,6 @@
 import { useQuery, useReactiveVar } from "@apollo/client";
 import { useAuth0 } from "@auth0/auth0-react";
+import { Query_Root } from "../../../generated/graphql";
 import { CALORIES_BY_DATE } from "../../../graphql/Queries";
 import { startDateVar, endDateVar } from "../../../graphql/Store";
 import { ChartContainer } from "../../../stories/chartContainer/ChartContainer";
@@ -15,7 +16,7 @@ const CaloriesByDate: React.FC = () => {
   const startDate = s;
   const endDate = e;
 
-  const { data, loading } = useQuery(CALORIES_BY_DATE, {
+  const { data, loading } = useQuery<Query_Root>(CALORIES_BY_DATE, {
     variables: { userId, startDate, endDate },
   });
 

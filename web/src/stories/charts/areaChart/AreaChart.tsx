@@ -31,8 +31,8 @@ const demoOptions = {
   },
 };
 
-const AreaChart: React.FC<ChartProps> = ({ datasets, labels }) => {
-  if (!datasets || !labels) {
+const AreaChart: React.FC<ChartProps> = (props: ChartProps) => {
+  if (!props) {
     return (
       <ReactApexChart
         options={demoOptions}
@@ -42,7 +42,11 @@ const AreaChart: React.FC<ChartProps> = ({ datasets, labels }) => {
       />
     );
   }
-  const series = datasets;
+  const series = [{
+    name: 'Calories',
+    data: props.values as number[],
+  }];
+
   const options = {
     chart: {
       height: 400,
@@ -51,7 +55,7 @@ const AreaChart: React.FC<ChartProps> = ({ datasets, labels }) => {
       enabled: false,
     },
     xaxis: {
-      categories: labels,
+      categories: props.labels,
     },
   };
   return (
