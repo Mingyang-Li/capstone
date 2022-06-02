@@ -30,8 +30,9 @@ export default function BasicDateRangePicker() {
   };
 
   const checkToDisable = () => {
-    return value[0] === s && value[1] === e;
+    return (value[0] as Date) === s && (value[1] as Date) === e;
   };
+
   const disabled = checkToDisable();
 
   return (
