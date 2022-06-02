@@ -7,7 +7,7 @@ const LoginButton: React.FC = () => {
   const { loginWithRedirect } = useAuth0();
   const login = useCallback(() => {
     loginWithRedirect().then(() => navigate("/dashboard"));
-  }, [navigate]);
+  }, [navigate, loginWithRedirect]);
   return <button onClick={() => login()}>Log In</button>;
 };
 
