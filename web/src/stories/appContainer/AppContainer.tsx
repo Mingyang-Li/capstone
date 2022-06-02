@@ -18,6 +18,7 @@ import ListItemText from "@mui/material/ListItemText";
 import PeopleAltIcon from "@mui/icons-material/PeopleAlt";
 import LogoutIcon from "@mui/icons-material/Logout";
 import { useAuth0 } from "@auth0/auth0-react";
+import Tooltip from "@mui/material/Tooltip";
 
 const drawerWidth = 240;
 
@@ -166,29 +167,35 @@ const AppContainer: React.FC<IAppContainer> = ({ title, contents }) => {
         </List>
         <Divider />
         <List>
-          <ListItemButton
-            onClick={() => logout()}
-            key={"Logout"}
-            sx={{
-              minHeight: 48,
-              justifyContent: open ? "initial" : "center",
-              px: 2.5,
-            }}
-          >
-            <ListItemIcon
+          <Tooltip title="Logout" placement="right">
+            <ListItemButton
+              onClick={() => logout()}
+              key={"Logout"}
               sx={{
-                minWidth: 0,
-                mr: open ? 3 : "auto",
-                justifyContent: "center",
+                minHeight: 48,
+                justifyContent: open ? "initial" : "center",
+                px: 2.5,
               }}
             >
-              <LogoutIcon />
-            </ListItemIcon>
-            <ListItemText primary={"Logout"} sx={{ opacity: open ? 1 : 0 }} />
-          </ListItemButton>
+              <ListItemIcon
+                sx={{
+                  minWidth: 0,
+                  mr: open ? 3 : "auto",
+                  justifyContent: "center",
+                }}
+              >
+                <LogoutIcon />
+              </ListItemIcon>
+              <ListItemText primary={"Logout"} sx={{ opacity: open ? 1 : 0 }} />
+            </ListItemButton>
+          </Tooltip>
         </List>
       </Drawer>
-      <Box component="main" sx={{ flexGrow: 1, p: 3 }} style={{ height: "95vh" }}>
+      <Box
+        component="main"
+        sx={{ flexGrow: 1, p: 3 }}
+        style={{ height: "95vh" }}
+      >
         <DrawerHeader />
         {contents}
       </Box>

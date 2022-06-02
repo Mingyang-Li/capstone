@@ -35,12 +35,16 @@ export default function BasicDateRangePicker() {
 
   const disabled = checkToDisable();
 
+  const disableInvalidDates = (date: Date) => {
+    return !(new Date("2019-10-30") < date && date < new Date("2020-04-01"));
+  };
+
   return (
     <Stack direction="row" spacing={2}>
       <LocalizationProvider dateAdapter={AdapterDateFns}>
         <DateRangePicker
           inputFormat={"yyyy-MM-dd"}
-          minDate={new Date("2019-10-30")}
+          shouldDisableDate={disableInvalidDates}
           startText="Start date"
           endText="End date"
           value={value}
