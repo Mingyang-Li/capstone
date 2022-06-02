@@ -5,8 +5,8 @@ import AppContainer from "../stories/appContainer/AppContainer";
 import { Forbidden } from "./Forbidden";
 import BasicDateRangePicker from "../components/basicDateRangePicker/BasicDateRangePicker";
 import StepsVsCaloriesByDate from "../components/reports/stepsVsCaloriesByDate/StepsVsCaloriesByDate";
-import CaloriesByDate from "../components/reports/caloriesByDate/CaloriesByDate";
 import StepsVsDistanceByDate from "../components/reports/stepsVsDistanceByDate/StepsVsDistanceByDate";
+import CaloriesVsDistance from "../components/reports/caloriesVsDistance/CaloriesVsDistance";
 
 const Contents: React.FC = () => {
   const { isAuthenticated, isLoading } = useAuth0();
@@ -26,7 +26,7 @@ const Contents: React.FC = () => {
       <br></br>
       <StepsVsDistanceByDate />
       <br></br>
-      <CaloriesByDate />
+      <CaloriesVsDistance />
     </>
   );
 };

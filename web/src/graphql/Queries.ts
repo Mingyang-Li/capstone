@@ -61,3 +61,27 @@ export const STEPS_VS_CALORIES_BY_DATE = gql`
     }
   }
 `;
+
+export const CALORIES_VS_DISTANCE_BY_DATE = gql`
+  query ($userId: Int, $startDate: date!, $endDate: date!) {
+    DISTANCE_BY_DATE(
+      where: {
+        userId: { _eq: $userId }
+        date: { _gte: $startDate, _lte: $endDate }
+      }
+    ) {
+      date
+      sum
+    }
+
+    CALORIES_BY_DATE(
+      where: {
+        userId: { _eq: $userId }
+        date: { _gte: $startDate, _lte: $endDate }
+      }
+    ) {
+      date
+      sum
+    }
+  }
+`;

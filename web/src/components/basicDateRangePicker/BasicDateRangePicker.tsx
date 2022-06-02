@@ -1,13 +1,16 @@
-import * as React from 'react';
-import TextField from '@mui/material/TextField';
-import { DateRangePicker, DateRange } from '@mui/x-date-pickers-pro/DateRangePicker';
-import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
-import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
-import Box from '@mui/material/Box';
-import { useReactiveVar } from '@apollo/client';
-import { startDateVar, endDateVar } from '../../graphql/Store';
-import { Stack } from '@mui/material';
-import { addDays } from 'date-fns';
+import * as React from "react";
+import TextField from "@mui/material/TextField";
+import {
+  DateRangePicker,
+  DateRange,
+} from "@mui/x-date-pickers-pro/DateRangePicker";
+import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
+import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
+import Box from "@mui/material/Box";
+import { useReactiveVar } from "@apollo/client";
+import { startDateVar, endDateVar } from "../../graphql/Store";
+import { Stack } from "@mui/material";
+import { addDays } from "date-fns";
 
 export default function BasicDateRangePicker() {
   const s = useReactiveVar(startDateVar);
@@ -34,28 +37,29 @@ export default function BasicDateRangePicker() {
   return (
     <Stack direction="row" spacing={2}>
       <LocalizationProvider dateAdapter={AdapterDateFns}>
-      <DateRangePicker
-        minDate={new Date("2019-10-30")}
-        startText="Start date"
-        endText="End date"
-        value={value}
-        onChange={(newValue) => {
-          updateDateRange(newValue);
-        }}
-        renderInput={(startProps, endProps) => (
-          <React.Fragment>
-            <TextField {...startProps} />
-            <Box sx={{ mx: 2 }}> to </Box>
-            <TextField {...endProps} />
-          </React.Fragment>
-        )}
-      />
-    </LocalizationProvider>
-    <button
+        <DateRangePicker
+          inputFormat={"yyyy-MM-dd"}
+          minDate={new Date("2019-10-30")}
+          startText="Start date"
+          endText="End date"
+          value={value}
+          onChange={(newValue) => {
+            updateDateRange(newValue);
+          }}
+          renderInput={(startProps, endProps) => (
+            <React.Fragment>
+              <TextField {...startProps} />
+              <Box sx={{ mx: 2 }}> to </Box>
+              <TextField {...endProps} />
+            </React.Fragment>
+          )}
+        />
+      </LocalizationProvider>
+      <button
         className={
           !disabled
-            ? 'h-12 px-6 text-indigo-100 transition-colors duration-350 bg-green-600 rounded-lg focus:shadow-outline hover:bg-yellow-500'
-            : 'h-12 px-6 text-indigo-100 bg-gray-500 rounded-lg focus:shadow-outline'
+            ? "h-12 px-6 text-indigo-100 transition-colors duration-350 bg-green-600 rounded-lg focus:shadow-outline hover:bg-yellow-500"
+            : "h-12 px-6 text-indigo-100 bg-gray-500 rounded-lg focus:shadow-outline"
         }
         onClick={applyDateRangeFilter}
         disabled={disabled}
