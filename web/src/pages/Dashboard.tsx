@@ -1,10 +1,12 @@
 import { useAuth0 } from "@auth0/auth0-react";
 import { useEffect } from "react";
 import Loading from "../components/Loading";
-import CaloriesByDate from "../components/reports/caloriesByDate/CaloriesByDate";
 import AppContainer from "../stories/appContainer/AppContainer";
 import { Forbidden } from "./Forbidden";
 import BasicDateRangePicker from "../components/basicDateRangePicker/BasicDateRangePicker";
+import StepsVsCaloriesByDate from "../components/reports/stepsVsCaloriesByDate/StepsVsCaloriesByDate";
+import CaloriesByDate from "../components/reports/caloriesByDate/CaloriesByDate";
+import StepsVsDistanceByDate from "../components/reports/stepsVsDistanceByDate/StepsVsDistanceByDate";
 
 const Contents: React.FC = () => {
   const { isAuthenticated, isLoading } = useAuth0();
@@ -20,9 +22,15 @@ const Contents: React.FC = () => {
     <>
       <BasicDateRangePicker />
       <br></br>
+      <StepsVsCaloriesByDate />
+      <br></br>
+      <StepsVsDistanceByDate />
+      <br></br>
       <CaloriesByDate />
     </>
   );
 };
 
-export const Dashboard: React.FC = () => <AppContainer title="Dashboard" contents={<Contents />} />;
+export const Dashboard: React.FC = () => (
+  <AppContainer title="Dashboard" contents={<Contents />} />
+);

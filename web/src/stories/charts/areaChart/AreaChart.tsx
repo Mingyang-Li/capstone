@@ -1,6 +1,7 @@
 import ReactApexChart from "react-apexcharts";
 import { ChartProps } from "../../../dto/Charts.dto";
-import Loading from '../../../components/Loading';
+import Loading from "../../../components/Loading";
+import { ApexOptions } from "apexcharts";
 
 export const demoSeries = [
   {
@@ -34,14 +35,10 @@ export const demoOptions = {
 
 const AreaChart: React.FC<ChartProps> = (props: ChartProps) => {
   if (!props || props.loading) {
-    return <Loading />
+    return <Loading />;
   }
-  const series = [{
-    name: 'Calories',
-    data: props.values as number[],
-  }];
 
-  const options = {
+  const options: ApexOptions = {
     chart: {
       height: 400,
     },
@@ -49,13 +46,14 @@ const AreaChart: React.FC<ChartProps> = (props: ChartProps) => {
       enabled: false,
     },
     xaxis: {
+      type: "datetime",
       categories: props.labels,
     },
   };
   return (
     <ReactApexChart
       options={options}
-      series={series}
+      series={props.series}
       height={350}
       type="area"
     />

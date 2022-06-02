@@ -1,5 +1,6 @@
 import { useQuery, useReactiveVar } from "@apollo/client";
 import { useAuth0 } from "@auth0/auth0-react";
+import { Series } from "../../../dto/Charts.dto";
 import { Query_Root } from "../../../generated/graphql";
 import { CALORIES_BY_DATE } from "../../../graphql/Queries";
 import { startDateVar, endDateVar } from "../../../graphql/Store";
@@ -23,12 +24,18 @@ const CaloriesByDate: React.FC = () => {
   const d = data?.CALORIES_BY_DATE;
   const labels = d?.map((item: any) => item.date);
   const values = d?.map((item: any) => item.sum);
+  const series: Series[] = [
+    {
+      name: "Calories",
+      data: values as number[],
+    },
+  ];
   return (
     <>
       <ChartContainer
         title={"Calories by date"}
         component={
-          <AreaChart labels={labels} values={values} loading={loading} />
+          <AreaChart labels={labels} series={series} loading={loading} />
         }
       />
     </>

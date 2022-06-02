@@ -1,8 +1,14 @@
+export interface Series {
+  name: string;
+  data: number[];
+}
+
 export interface ChartProps {
   labels?: (string | undefined)[];
   values?: (number | undefined)[];
   datasets?: DataSet[];
   loading?: boolean;
+  series: Series[];
 }
 
 export interface DataSet {
