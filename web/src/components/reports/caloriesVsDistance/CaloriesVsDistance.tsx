@@ -30,11 +30,11 @@ const CaloriesVsDistance: React.FC = () => {
 
   const series: Series[] = [
     {
-      name: "Distance",
+      name: "Distance (m)",
       data: values_distance as number[],
     },
     {
-      name: "Calories",
+      name: "Calories (KJs)",
       data: values_calories as number[],
     },
   ];
