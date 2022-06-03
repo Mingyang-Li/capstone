@@ -220,7 +220,7 @@ export const migrateHeartRate = () => {
   console.log('✔️ Got all file data');
 
   files.forEach(async (e) => {
-    console.log(`⌛ => Migrating HeartRate file for person ${e.userId}`);
+    console.log(`⌛ === Migrating HeartRate file for person ${e.userId}`);
 
     const originalData = e.data.map((item) => {
       const data: CreateHeartRateArgs = {
@@ -233,10 +233,19 @@ export const migrateHeartRate = () => {
       return data;
     });
 
-    await prisma.distance.createMany({ data: originalData });
+    console.log(
+      `⌛ === Migrating ${originalData.length} rows of HeartRate for person ${e.userId}`,
+    );
+
+    const seeding = originalData.map(
+      async (e) => await prisma.distance.create({ data: e }),
+    );
+    console.log(
+      `👻 === Processed seeding: ${JSON.stringify(Promise.all(seeding))}`,
+    );
 
     console.log(
-      `✔️ => Completed migrating ${originalData.length} rows of HeartRate for person ${e.userId}\n`,
+      `✔️ === Completed migrating ${originalData.length} rows of HeartRate for person ${e.userId}`,
     );
   });
 };
