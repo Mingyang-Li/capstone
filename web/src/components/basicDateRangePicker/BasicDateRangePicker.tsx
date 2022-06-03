@@ -36,7 +36,7 @@ export default function BasicDateRangePicker() {
   const disabled = checkToDisable();
 
   const disableInvalidDates = (date: Date) => {
-    return !(new Date("2019-10-30") < date && date < new Date("2020-04-01"));
+    return !(new Date("2019-10-10") < date && date < new Date("2020-04-01"));
   };
 
   return (
