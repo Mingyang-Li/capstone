@@ -7,6 +7,7 @@ import BasicDateRangePicker from "../components/basicDateRangePicker/BasicDateRa
 import StepsVsCaloriesByDate from "../components/reports/stepsVsCaloriesByDate/StepsVsCaloriesByDate";
 import StepsVsDistanceByDate from "../components/reports/stepsVsDistanceByDate/StepsVsDistanceByDate";
 import CaloriesVsDistance from "../components/reports/caloriesVsDistance/CaloriesVsDistance";
+import InfoCard from "../stories/InfoCard/InfoCard";
 
 const Contents: React.FC = () => {
   const { isAuthenticated, isLoading } = useAuth0();
@@ -21,6 +22,8 @@ const Contents: React.FC = () => {
   return (
     <>
       <BasicDateRangePicker />
+      <br></br>
+      <InfoCard />
       <br></br>
       <StepsVsCaloriesByDate />
       <br></br>
