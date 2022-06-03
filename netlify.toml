@@ -12,7 +12,7 @@
   # a base has not been set. This sample publishes the directory 
   # located at the absolute path "root/project/build-output"
   
-  publish = "build-output/"
+  publish = "web/build"
 
   # Default build command.
   command = "echo 'default context'"
@@ -29,7 +29,7 @@
 [context.production]
   publish = "output/"
   command = "make publish"
-  environment = { NODE_VERSION = "14.15.3" }
+  environment = { NODE_VERSION = "16.15.0" }
 
 # Deploy Preview context: all deploys generated from
 # a pull/merge request will inherit these settings.
@@ -68,16 +68,6 @@
 # For context-specific rules, use _headers or _redirects files,
 # which are PER-DEPLOY.
 
-# A basic redirect rule
-[[redirects]]
-  from = "/*"
-  to = "/blog/:splat"
-
-# A redirect rule with many of the supported properties
-[[redirects]]
-  from = "/old-path"
-  to = "/new-path"
-
   # The default HTTP status code is 301, but you can 
   # define a different one.
   status = 302
@@ -88,23 +78,9 @@
   # take precedence over any existing files.
   force = true
 
-  # Redirect from /old-path?id=123 to /new-path. 
-  # Each combination of query params needs to be 
-  # defined in a separate [[redirects]] block.
-  # More information at https://docs.netlify.com/routing/redirects/redirect-options/#query-parameters
-  query = {id = ":id"}
-
   # Redirect based on conditions including browser language, 
   # geolocation, identity role, and/or cookie presence.
   conditions = {Language = ["en"], Country = ["US"]}
-
-  # Sign each request with a value defined in an environment variable
-  signed = "API_SIGNATURE_TOKEN"
-
-  # You can also define custom headers within your redirects blocks.
-  [redirects.headers]
-    X-From = "Netlify"
-    X-Api-Key = "some-api-key-string"
 
 # The following redirect is intended for use with most SPAs 
 # that handle routing internally.
