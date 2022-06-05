@@ -7,10 +7,11 @@ import BasicDateRangePicker from "../components/basicDateRangePicker/BasicDateRa
 import StepsVsCaloriesByDate from "../components/reports/stepsVsCaloriesByDate/StepsVsCaloriesByDate";
 import StepsVsDistanceByDate from "../components/reports/stepsVsDistanceByDate/StepsVsDistanceByDate";
 import CaloriesVsDistance from "../components/reports/caloriesVsDistance/CaloriesVsDistance";
-import InfoCard from "../stories/InfoCard/InfoCard";
 import Grid from "@mui/material/Grid";
 import TotalCalories from "../components/cards/totalCalories/TotalCalories";
 import AverageDailyCalories from "../components/cards/averageDailyCalories/AverageDailyCalories";
+import TotalSteps from "../components/cards/totalSteps/TotalSteps";
+import AverageDailySteps from "../components/cards/averageDailySteps/AverageDailySteps";
 
 const Contents: React.FC = () => {
   const { isAuthenticated, isLoading } = useAuth0();
@@ -34,10 +35,10 @@ const Contents: React.FC = () => {
           <AverageDailyCalories />
         </Grid>
         <Grid item md={3}>
-          <InfoCard />
+          <TotalSteps />
         </Grid>
         <Grid item md={3}>
-          <InfoCard />
+          <AverageDailySteps />
         </Grid>
       </Grid>
       <br></br>
