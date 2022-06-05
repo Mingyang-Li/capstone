@@ -1,36 +1,40 @@
-import ArrowCircleDownIcon from '@mui/icons-material/ArrowCircleDown';
-import { Avatar, Card, CardContent, Grid, Typography } from '@mui/material';
-import { blue } from '@mui/material/colors';
+import ArrowCircleDownIcon from "@mui/icons-material/ArrowCircleDown";
+import { Avatar, Card, CardContent, Grid, Typography } from "@mui/material";
+import CountUp from "react-countup";
 
 interface ICard {
+  loading?: boolean;
   title?: string;
   value?: number;
   unit?: string;
   icon?: React.ReactNode;
+  iconColor?: any;
 }
 
 const InfoCard = (props: ICard) => {
   return (
-    <Card sx={{ height: '100%' }} variant="outlined">
+    <Card sx={{ height: "auto" }} variant="outlined">
       <CardContent>
-        <Grid container spacing={3} sx={{ justifyContent: 'space-between' }}>
+        <Grid container spacing={3} sx={{ justifyContent: "space-between" }}>
           <Grid item>
             <Typography color="textSecondary" gutterBottom variant="h6">
-              Card title
+              {props.title ?? "Card title"}
             </Typography>
             <Typography color="red" variant="h5">
-              1000 KJs (e.g)
+              <CountUp start={0} end={100} delay={0} duration={2.75} />
+              {/* {props.value ?? "1000"}
+              {props.unit ?? ""} */}
             </Typography>
           </Grid>
           <Grid item>
             <Avatar
               sx={{
-                backgroundColor: blue[600],
-                height: 56,
-                width: 56,
+                backgroundColor: props.iconColor ?? "pink",
+                height: 46,
+                width: 46,
               }}
             >
-              <ArrowCircleDownIcon />
+              {props.icon ?? <ArrowCircleDownIcon />}
             </Avatar>
           </Grid>
         </Grid>

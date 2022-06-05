@@ -8,6 +8,8 @@ import StepsVsCaloriesByDate from "../components/reports/stepsVsCaloriesByDate/S
 import StepsVsDistanceByDate from "../components/reports/stepsVsDistanceByDate/StepsVsDistanceByDate";
 import CaloriesVsDistance from "../components/reports/caloriesVsDistance/CaloriesVsDistance";
 import InfoCard from "../stories/InfoCard/InfoCard";
+import Grid from "@mui/material/Grid";
+import TotalCalories from "../components/cards/totalCalories/TotalCalories";
 
 const Contents: React.FC = () => {
   const { isAuthenticated, isLoading } = useAuth0();
@@ -23,7 +25,20 @@ const Contents: React.FC = () => {
     <>
       <BasicDateRangePicker />
       <br></br>
-      <InfoCard />
+      <Grid container spacing={2}>
+        <Grid item md={3}>
+          <TotalCalories />
+        </Grid>
+        <Grid item md={3}>
+          <InfoCard />
+        </Grid>
+        <Grid item md={3}>
+          <InfoCard />
+        </Grid>
+        <Grid item md={3}>
+          <InfoCard />
+        </Grid>
+      </Grid>
       <br></br>
       <StepsVsCaloriesByDate />
       <br></br>
