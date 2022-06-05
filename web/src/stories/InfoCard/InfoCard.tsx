@@ -1,12 +1,12 @@
 import ArrowCircleDownIcon from "@mui/icons-material/ArrowCircleDown";
 import { Avatar, Card, CardContent, Grid, Typography } from "@mui/material";
-import CountUp from "react-countup";
 
 interface ICard {
   loading?: boolean;
   title?: string;
   value?: number;
   unit?: string;
+  countUp?: React.ReactNode;
   icon?: React.ReactNode;
   iconColor?: any;
 }
@@ -20,11 +20,7 @@ const InfoCard = (props: ICard) => {
             <Typography color="textSecondary" gutterBottom variant="h6">
               {props.title ?? "Card title"}
             </Typography>
-            <Typography color="red" variant="h5">
-              <CountUp start={0} end={100} delay={0} duration={2.75} />
-              {/* {props.value ?? "1000"}
-              {props.unit ?? ""} */}
-            </Typography>
+            <Typography variant="h5">{props.countUp ?? "1000"}</Typography>
           </Grid>
           <Grid item>
             <Avatar

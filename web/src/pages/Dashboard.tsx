@@ -10,6 +10,7 @@ import CaloriesVsDistance from "../components/reports/caloriesVsDistance/Calorie
 import InfoCard from "../stories/InfoCard/InfoCard";
 import Grid from "@mui/material/Grid";
 import TotalCalories from "../components/cards/totalCalories/TotalCalories";
+import AverageDailyCalories from "../components/cards/averageDailyCalories/AverageDailyCalories";
 
 const Contents: React.FC = () => {
   const { isAuthenticated, isLoading } = useAuth0();
@@ -30,7 +31,7 @@ const Contents: React.FC = () => {
           <TotalCalories />
         </Grid>
         <Grid item md={3}>
-          <InfoCard />
+          <AverageDailyCalories />
         </Grid>
         <Grid item md={3}>
           <InfoCard />

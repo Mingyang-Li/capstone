@@ -8,7 +8,7 @@ import { Query_Root } from "../../../generated/graphql";
 import { startDateVar, endDateVar } from "../../../graphql/Store";
 import CountUp from "react-countup";
 
-const TotalCalories: React.FC = () => {
+const AverageDailyCalories: React.FC = () => {
   const { user } = useAuth0();
   const s = useReactiveVar(startDateVar);
   const e = useReactiveVar(endDateVar);
@@ -26,17 +26,20 @@ const TotalCalories: React.FC = () => {
   const caloriesSum = calories
     ?.map((item: any) => item.sum)
     .reduce((partialSum, a) => partialSum + a, 0);
+  const num = calories?.length;
+  const avg = (caloriesSum ?? 100) / (num ?? 1);
 
   return (
     <InfoCard
       loading={loading}
-      title="Total Calories"
+      title="Average Daily Calories"
       countUp={
         <CountUp
           start={0}
-          end={Math.round(caloriesSum)}
+          end={Math.round(avg)}
           delay={0}
-          duration={1.5}
+          duration={1.7}
+          decimal="."
           suffix=" KJs"
           separator=","
         />
@@ -47,4 +50,4 @@ const TotalCalories: React.FC = () => {
   );
 };
 
-export default TotalCalories;
+export default AverageDailyCalories;
