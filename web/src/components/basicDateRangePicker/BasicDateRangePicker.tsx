@@ -1,4 +1,4 @@
-import * as React from "react";
+import React, { useState } from "react";
 import TextField from "@mui/material/TextField";
 import {
   DateRangePicker,
@@ -15,28 +15,29 @@ import { addDays } from "date-fns";
 export default function BasicDateRangePicker() {
   const s = useReactiveVar(startDateVar);
   const e = useReactiveVar(endDateVar);
-  const [value, setValue] = React.useState<DateRange<Date>>([
+  const [value, setValue] = useState<DateRange<Date>>([
     new Date(s),
     new Date(e),
   ]);
+  const [disableBtn, setDisableBtn] = useState(true);
 
   const updateDateRange = (dateRange: any) => {
     setValue(dateRange);
+    setDisableBtn(!disableBtn);
   };
 
   const applyDateRangeFilter = () => {
     startDateVar(addDays(value[0] as Date, 1));
     endDateVar(addDays(value[1] as Date, 1));
+    setDisableBtn(true);
   };
 
   const disableFilterButton = () => {
     return (value[0] as Date) === s && (value[1] as Date) === e;
   };
 
-  const disabled = disableFilterButton();
-
   const disableInvalidDates = (date: Date) => {
-    return !(new Date("2019-10-30") < date && date < new Date("2020-04-01"));
+    return !(new Date("2019-10-20") < date && date < new Date("2020-04-01"));
   };
 
   return (
@@ -63,7 +64,7 @@ export default function BasicDateRangePicker() {
       <Button
         variant="contained"
         onClick={applyDateRangeFilter}
-        disabled={disabled}
+        disabled={disableBtn}
       >
         Apply filter
       </Button>
