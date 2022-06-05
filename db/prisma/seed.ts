@@ -46,7 +46,6 @@ export class Seeding {
 
   openFileByUserId(userId: number, file: File) {
     const filePath = `${this.configService.PATH_LOCAL_DATASET}/p0${userId}/fitbit/${file}.json`;
-    // eslint-disable-next-line @typescript-eslint/no-var-requires
     const rawdata = require('fs').readFileSync(filePath, 'utf8');
     const json = JSON.parse(rawdata.toString());
     return json;
@@ -240,9 +239,8 @@ export const migrateHeartRate = () => {
     const seeding = originalData.map(
       async (e) => await prisma.distance.create({ data: e }),
     );
-    console.log(
-      `👻 === Processed seeding: ${JSON.stringify(Promise.all(seeding))}`,
-    );
+    const processed = Promise.all(seeding);
+    console.log(`👻 === Processed seeding: ${JSON.stringify(processed)}`);
 
     console.log(
       `✔️ === Completed migrating ${originalData.length} rows of HeartRate for person ${e.userId}`,
