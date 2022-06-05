@@ -9,7 +9,7 @@ import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import Box from "@mui/material/Box";
 import { useReactiveVar } from "@apollo/client";
 import { startDateVar, endDateVar } from "../../graphql/Store";
-import { Stack } from "@mui/material";
+import { Button, Stack } from "@mui/material";
 import { addDays } from "date-fns";
 
 export default function BasicDateRangePicker() {
@@ -29,14 +29,14 @@ export default function BasicDateRangePicker() {
     endDateVar(addDays(value[1] as Date, 1));
   };
 
-  const checkToDisable = () => {
+  const disableFilterButton = () => {
     return (value[0] as Date) === s && (value[1] as Date) === e;
   };
 
-  const disabled = checkToDisable();
+  const disabled = disableFilterButton();
 
   const disableInvalidDates = (date: Date) => {
-    return !(new Date("2019-10-10") < date && date < new Date("2020-04-01"));
+    return !(new Date("2019-10-30") < date && date < new Date("2020-04-01"));
   };
 
   return (
@@ -53,24 +53,20 @@ export default function BasicDateRangePicker() {
           }}
           renderInput={(startProps, endProps) => (
             <React.Fragment>
-              <TextField {...startProps} />
+              <TextField disabled {...startProps} />
               <Box sx={{ mx: 2 }}> to </Box>
-              <TextField {...endProps} />
+              <TextField disabled {...endProps} />
             </React.Fragment>
           )}
         />
       </LocalizationProvider>
-      <button
-        className={
-          !disabled
-            ? "h-12 px-6 text-indigo-100 transition-colors duration-350 bg-green-600 rounded-lg focus:shadow-outline hover:bg-yellow-500"
-            : "h-12 px-6 text-indigo-100 bg-gray-500 rounded-lg focus:shadow-outline"
-        }
+      <Button
+        variant="contained"
         onClick={applyDateRangeFilter}
         disabled={disabled}
       >
         Apply filter
-      </button>
+      </Button>
     </Stack>
   );
 }

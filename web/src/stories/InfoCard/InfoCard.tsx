@@ -20,7 +20,7 @@ const InfoCard = (props: ICard) => {
             <Typography color="textSecondary" gutterBottom variant="h6">
               {props.title ?? "Card title"}
             </Typography>
-            <Typography variant="h5">{props.countUp ?? "1000"}</Typography>
+            <Typography variant="h5">{props.countUp ?? "Loading"}</Typography>
           </Grid>
           <Grid item>
             <Avatar
