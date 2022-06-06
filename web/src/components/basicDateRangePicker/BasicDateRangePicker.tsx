@@ -32,10 +32,6 @@ export default function BasicDateRangePicker() {
     setDisableBtn(true);
   };
 
-  const disableFilterButton = () => {
-    return (value[0] as Date) === s && (value[1] as Date) === e;
-  };
-
   const disableInvalidDates = (date: Date) => {
     return !(new Date("2019-10-20") < date && date < new Date("2020-04-01"));
   };
