@@ -236,12 +236,6 @@ export const migrateHeartRate = () => {
       `⌛ === Migrating ${originalData.length} rows of HeartRate for person ${e.userId}`,
     );
 
-    const seeding = originalData.map(
-      async (e) => await prisma.distance.create({ data: e }),
-    );
-    const processed = Promise.all(seeding);
-    console.log(`👻 === Processed seeding: ${JSON.stringify(processed)}`);
-
     console.log(
       `✔️ === Completed migrating ${originalData.length} rows of HeartRate for person ${e.userId}`,
     );
@@ -255,7 +249,7 @@ type Table =
   | 'HeartRate'
   | 'VeryActiveMinutes';
 
-export async function clearTable(table?: Table) {
+export const clearTable = async (table?: Table) => {
   switch (table) {
     case 'Calories':
       await prisma.calories.deleteMany({});
@@ -274,6 +268,12 @@ export async function clearTable(table?: Table) {
       await prisma.heartRate.deleteMany({});
       await prisma.veryActiveMinutes.deleteMany({});
   }
-}
+};
 
 migrateHeartRate();
+
+// const v8 = require('v8');
+// console.log(`stats: ${JSON.stringify(v8.getHeapStatistics())}`);
+
+// old: 179134464
+// new: 179658752

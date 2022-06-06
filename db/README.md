@@ -37,3 +37,15 @@ $ yarn start:dev
 # production mode
 $ yarn start:prod
 ```
+
+## Issues & resolutions
+
+When migrating HeartRate (roughlu 150K rows per person), I came across this issue:
+
+```bash
+FATAL ERROR: Ineffective mark-compacts near heap limit Allocation failed - JavaScript heap out of memory
+```
+
+Resolution:
+In capstone/db terminal, enter the following command:
+`set NODE OPTIONS=--max_old_space_size=4096`
