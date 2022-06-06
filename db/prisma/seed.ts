@@ -236,9 +236,11 @@ export const migrateHeartRate = () => {
       `⌛ === Migrating ${originalData.length} rows of HeartRate for person ${e.userId}`,
     );
 
-    console.log(
-      `✔️ === Completed migrating ${originalData.length} rows of HeartRate for person ${e.userId}`,
-    );
+    await prisma.heartRate.createMany({ data: originalData }).then(() => {
+      console.log(
+        `✔️ === Completed migrating ${originalData.length} rows of HeartRate for person ${e.userId}`,
+      );
+    });
   });
 };
 
@@ -270,10 +272,5 @@ export const clearTable = async (table?: Table) => {
   }
 };
 
-migrateHeartRate();
-
 // const v8 = require('v8');
-// console.log(`stats: ${JSON.stringify(v8.getHeapStatistics())}`);
-
-// old: 179134464
-// new: 179658752
+// console.table(v8.getHeapStatistics());
