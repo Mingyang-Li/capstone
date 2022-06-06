@@ -1,6 +1,7 @@
 export interface Series {
   name: string;
   data: number[];
+  type?: "area" | "line";
 }
 
 export interface ChartProps {

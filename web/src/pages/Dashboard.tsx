@@ -29,16 +29,16 @@ const Contents: React.FC = () => {
       <BasicDateRangePicker />
       <br></br>
       <Grid container spacing={2}>
-        <Grid item md={3}>
+        <Grid item md={3} sm={12}>
           <TotalCalories />
         </Grid>
-        <Grid item md={3}>
+        <Grid item md={3} sm={12}>
           <AverageDailyCalories />
         </Grid>
-        <Grid item md={3}>
+        <Grid item md={3} sm={12}>
           <TotalSteps />
         </Grid>
-        <Grid item md={3}>
+        <Grid item md={3} sm={12}>
           <AverageDailySteps />
         </Grid>
       </Grid>

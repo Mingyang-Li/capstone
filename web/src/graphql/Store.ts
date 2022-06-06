@@ -7,7 +7,7 @@ export const startDateVar = makeVar(minDate);
 // default end date to be the month after
 export const endDateVar = makeVar(new Date("2019-11-30"));
 
-export const heartRateDateVar = makeVar(new Date("2019-10-31"));
+export const heartRateDateVar = makeVar(new Date("2019-11-01"));
 
 export const Store = new InMemoryCache({
   typePolicies: {
