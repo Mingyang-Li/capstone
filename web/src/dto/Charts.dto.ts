@@ -9,7 +9,7 @@ export interface ChartProps {
   values?: (number | undefined)[];
   datasets?: DataSet[];
   loading?: boolean;
-  series: Series[];
+  series?: Series[];
 }
 
 export interface DataSet {
@@ -23,3 +23,5 @@ export interface DataSet {
 export interface BarChartProps extends ChartProps {
   type: "horizontal" | "vertical";
 }
+
+export type xAxis = "datetime" | "category" | "numeric" | undefined;

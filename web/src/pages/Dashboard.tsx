@@ -13,6 +13,8 @@ import AverageDailyCalories from "../components/cards/averageDailyCalories/Avera
 import TotalSteps from "../components/cards/totalSteps/TotalSteps";
 import AverageDailySteps from "../components/cards/averageDailySteps/AverageDailySteps";
 import DailyHeartRate from "../components/reports/dailyHeartRate/DailyHeartRate";
+import ColumnChart from "../stories/charts/columnChart/ColumChart";
+import DailyVeryActiveMinutes from "../components/reports/dailyVeryActiveMinutes/DailyVeryActiveMinutes";
 
 const Contents: React.FC = () => {
   const { isAuthenticated, isLoading } = useAuth0();
@@ -43,12 +45,14 @@ const Contents: React.FC = () => {
         </Grid>
       </Grid>
       <br></br>
-      <DailyHeartRate />
-      {/* <StepsVsCaloriesByDate />
+      {/* <DailyHeartRate /> */}
+      <DailyVeryActiveMinutes />
+      <br />
+      <StepsVsCaloriesByDate />
       <br></br>
-      <StepsVsDistanceByDate />
+      {/* <StepsVsDistanceByDate /> */}
       <br></br>
-      <CaloriesVsDistance /> */}
+      <CaloriesVsDistance />
     </>
   );
 };

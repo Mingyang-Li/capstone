@@ -32,7 +32,7 @@ const AverageDailySteps: React.FC = () => {
   return (
     <InfoCard
       loading={loading}
-      title="Average Daily Steps"
+      title="Avg Daily Steps"
       countUp={
         <CountUp
           start={0}

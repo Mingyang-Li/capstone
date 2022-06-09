@@ -165,28 +165,6 @@ const AppContainer: React.FC<IAppContainer> = ({ title, contents }) => {
               sx={{ opacity: open ? 1 : 0 }}
             />
           </ListItemButton>
-          <ListItemButton
-            key={"heartRate"}
-            sx={{
-              minHeight: 48,
-              justifyContent: open ? "initial" : "center",
-              px: 2.5,
-            }}
-          >
-            <ListItemIcon
-              sx={{
-                minWidth: 0,
-                mr: open ? 3 : "auto",
-                justifyContent: "center",
-              }}
-            >
-              <PeopleAltIcon />
-            </ListItemIcon>
-            <ListItemText
-              primary={"Heart Rate"}
-              sx={{ opacity: open ? 1 : 0 }}
-            />
-          </ListItemButton>
         </List>
         <Divider />
         <List>

@@ -94,3 +94,17 @@ export const HEART_RATE = gql`
     }
   }
 `;
+
+export const VERY_ACTIVE_MINUTES_BY_DATE = gql`
+  query ($userId: Int, $startDate: date!, $endDate: date!) {
+    VERY_ACTIVE_MINUTES_BY_DATE(
+      where: {
+        userId: { _eq: $userId }
+        date: { _gte: $startDate, _lte: $endDate }
+      }
+    ) {
+      date
+      sum
+    }
+  }
+`;
