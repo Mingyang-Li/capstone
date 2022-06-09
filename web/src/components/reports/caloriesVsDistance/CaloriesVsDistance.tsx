@@ -25,18 +25,11 @@ const CaloriesVsDistance: React.FC = () => {
   const labels = distance?.map((item: any) => item.date);
   const values_distance = distance?.map((item: any) => item.sum / 100);
 
-  const calories = data?.CALORIES_BY_DATE;
-  const values_calories = calories?.map((item: any) => item.sum);
-
   const series: Series[] = [
     {
       name: "Distance (m)",
       data: values_distance as number[],
     },
-    // {
-    //   name: "Calories (KJs)",
-    //   data: values_calories as number[],
-    // },
   ];
   return (
     <>

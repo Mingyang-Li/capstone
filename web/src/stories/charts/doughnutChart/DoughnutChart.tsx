@@ -8,9 +8,8 @@ const DoughnutChart: React.FC<ChartProps> = (props: ChartProps) => {
     return <Loading />;
   }
 
-  const series = [44, 55, 41, 17, 15];
-
   const options: ApexOptions = {
+    labels: props.labels as string[],
     chart: {
       type: "donut",
     },
@@ -32,7 +31,7 @@ const DoughnutChart: React.FC<ChartProps> = (props: ChartProps) => {
   return (
     <ReactApexChart
       options={options}
-      series={series}
+      series={props.values as number[]}
       type={"donut"}
       height={350}
     />

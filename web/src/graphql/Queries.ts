@@ -103,7 +103,6 @@ export const CALORIES_VS_DISTANCE_BY_DATE = gql`
 export const HEART_RATE = gql`
   query ($userId: Int, $date: date!) {
     HeartRate(where: { userId: { _eq: $userId }, date: { _eq: $date } }) {
-      dateTime
       bpm
     }
   }

@@ -45,10 +45,10 @@ const Contents: React.FC = () => {
         </Grid>
 
         <Grid item md={6} sm={12}>
-          <HeartRateBreakDown />
+          <StepsVsCaloriesByDate />
         </Grid>
         <Grid item md={6} sm={12}>
-          <StepsVsCaloriesByDate />
+          <HeartRateBreakDown />
         </Grid>
         <Grid item md={6} sm={12}>
           <DailyVeryActiveMinutes />
