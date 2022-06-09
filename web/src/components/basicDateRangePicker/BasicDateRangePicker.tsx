@@ -21,9 +21,9 @@ export default function BasicDateRangePicker() {
   ]);
   const [disableBtn, setDisableBtn] = useState(true);
 
-  const updateDateRange = (dateRange: any) => {
+  const updateDateRange = (dateRange: DateRange<Date>) => {
     setValue(dateRange);
-    setDisableBtn(!disableBtn);
+    setDisableBtn(false);
   };
 
   const applyDateRangeFilter = () => {

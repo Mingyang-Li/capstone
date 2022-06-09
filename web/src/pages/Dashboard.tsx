@@ -5,7 +5,6 @@ import AppContainer from "../stories/appContainer/AppContainer";
 import { Forbidden } from "./Forbidden";
 import BasicDateRangePicker from "../components/basicDateRangePicker/BasicDateRangePicker";
 import StepsVsCaloriesByDate from "../components/reports/stepsVsCaloriesByDate/StepsVsCaloriesByDate";
-import StepsVsDistanceByDate from "../components/reports/stepsVsDistanceByDate/StepsVsDistanceByDate";
 import CaloriesVsDistance from "../components/reports/caloriesVsDistance/CaloriesVsDistance";
 import Grid from "@mui/material/Grid";
 import TotalCalories from "../components/cards/totalCalories/TotalCalories";
@@ -13,7 +12,6 @@ import AverageDailyCalories from "../components/cards/averageDailyCalories/Avera
 import TotalSteps from "../components/cards/totalSteps/TotalSteps";
 import AverageDailySteps from "../components/cards/averageDailySteps/AverageDailySteps";
 import DailyHeartRate from "../components/reports/dailyHeartRate/DailyHeartRate";
-import ColumnChart from "../stories/charts/columnChart/ColumChart";
 import DailyVeryActiveMinutes from "../components/reports/dailyVeryActiveMinutes/DailyVeryActiveMinutes";
 
 const Contents: React.FC = () => {
@@ -43,16 +41,17 @@ const Contents: React.FC = () => {
         <Grid item md={3} sm={12}>
           <AverageDailySteps />
         </Grid>
+
+        <Grid item md={6} sm={12}>
+          <StepsVsCaloriesByDate />
+        </Grid>
+        <Grid item md={6} sm={12}>
+          <DailyVeryActiveMinutes />
+        </Grid>
+        <Grid item md={12} sm={12}>
+          <CaloriesVsDistance />
+        </Grid>
       </Grid>
-      <br></br>
-      {/* <DailyHeartRate /> */}
-      <DailyVeryActiveMinutes />
-      <br />
-      <StepsVsCaloriesByDate />
-      <br></br>
-      {/* <StepsVsDistanceByDate /> */}
-      <br></br>
-      <CaloriesVsDistance />
     </>
   );
 };

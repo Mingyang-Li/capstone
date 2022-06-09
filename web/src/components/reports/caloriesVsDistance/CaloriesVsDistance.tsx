@@ -33,15 +33,15 @@ const CaloriesVsDistance: React.FC = () => {
       name: "Distance (m)",
       data: values_distance as number[],
     },
-    {
-      name: "Calories (KJs)",
-      data: values_calories as number[],
-    },
+    // {
+    //   name: "Calories (KJs)",
+    //   data: values_calories as number[],
+    // },
   ];
   return (
     <>
       <ChartContainer
-        title={"Calories VS Distance by date"}
+        title={"Distance by date"}
         component={
           <AreaChart labels={labels} series={series} loading={loading} />
         }

@@ -19,7 +19,7 @@ const ColumnChart: React.FC<ChartProps> = (props: ChartProps) => {
       options={options}
       series={props.series}
       type="bar"
-      height={310}
+      height={350}
     />
   );
 };
