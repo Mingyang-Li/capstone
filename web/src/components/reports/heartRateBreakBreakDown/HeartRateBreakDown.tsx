@@ -2,7 +2,7 @@ import { useQuery, useReactiveVar } from "@apollo/client";
 import { useAuth0 } from "@auth0/auth0-react";
 import { Series } from "../../../dto/Charts.dto";
 import { Query_Root } from "../../../generated/graphql";
-import { HEART_RATE } from "../../../graphql/Queries";
+import { HEART_RATE_BY_DATE } from "../../../graphql/Queries";
 import { heartRateDateVar } from "../../../graphql/Store";
 import { ChartContainer } from "../../../stories/chartContainer/ChartContainer";
 import DoughnutChart from "../../../stories/charts/doughnutChart/DoughnutChart";
@@ -16,7 +16,7 @@ const HeartRateBreakDown: React.FC = () => {
 
   const localDate = date;
 
-  const { data, loading } = useQuery<Query_Root>(HEART_RATE, {
+  const { data, loading } = useQuery<Query_Root>(HEART_RATE_BY_DATE, {
     variables: { userId, date: localDate },
   });
 

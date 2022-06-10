@@ -57,6 +57,9 @@ const Contents: React.FC = () => {
         <Grid item md={6} sm={12}>
           <CaloriesVsDistance />
         </Grid>
+        <Grid item md={12} sm={12}>
+          <DailyHeartRate />
+        </Grid>
       </Grid>
       <br />
     </>

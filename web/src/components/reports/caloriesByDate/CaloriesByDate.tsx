@@ -6,6 +6,7 @@ import { CALORIES_BY_DATE } from "../../../graphql/Queries";
 import { startDateVar, endDateVar } from "../../../graphql/Store";
 import { ChartContainer } from "../../../stories/chartContainer/ChartContainer";
 import ColumnChart from "../../../stories/charts/columnChart/ColumChart";
+import LineChart from "../../../stories/charts/lineChart/LineChart";
 
 const CaloriesByDate: React.FC = () => {
   const { user } = useAuth0();
@@ -26,8 +27,13 @@ const CaloriesByDate: React.FC = () => {
   const values = d?.map((item: any) => item.sum);
   const series: Series[] = [
     {
-      name: "Calories",
+      name: "Calories (KJs)",
       data: values as number[],
+    },
+    {
+      name: "Avg daily intake (KJs)",
+      type: "line",
+      data: values?.map(() => 2000) as number[],
     },
   ];
   return (
@@ -35,7 +41,7 @@ const CaloriesByDate: React.FC = () => {
       <ChartContainer
         title={"Calories by date"}
         component={
-          <ColumnChart labels={labels} series={series} loading={loading} />
+          <LineChart labels={labels} series={series} loading={loading} />
         }
       />
     </>

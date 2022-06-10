@@ -13,6 +13,13 @@ const ColumnChart: React.FC<ChartProps> = (props: ChartProps) => {
       categories: props.labels,
       type: "datetime" as xAxis,
     },
+    plotOptions: {
+      bar: {
+        dataLabels: {
+          hideOverflowingLabels: true,
+        },
+      },
+    },
   };
 
   return (
