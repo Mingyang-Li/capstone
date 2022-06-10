@@ -1,3 +1,4 @@
+import { ApexOptions } from "apexcharts";
 import ReactApexChart from "react-apexcharts";
 import Loading from "../../../components/Loading";
 import { ChartProps, xAxis } from "../../../dto/Charts.dto";
@@ -7,7 +8,7 @@ const ColumnChart: React.FC<ChartProps> = (props: ChartProps) => {
     return <Loading />;
   }
 
-  const options = {
+  const options: ApexOptions = {
     xaxis: {
       categories: props.labels,
       type: "datetime" as xAxis,

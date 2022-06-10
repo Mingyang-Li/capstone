@@ -15,6 +15,7 @@ import DailyHeartRate from "../components/reports/dailyHeartRate/DailyHeartRate"
 import DailyVeryActiveMinutes from "../components/reports/dailyVeryActiveMinutes/DailyVeryActiveMinutes";
 import DoughnutChart from "../stories/charts/doughnutChart/DoughnutChart";
 import HeartRateBreakDown from "../components/reports/heartRateBreakBreakDown/HeartRateBreakDown";
+import CaloriesByDate from "../components/reports/caloriesByDate/CaloriesByDate";
 
 const Contents: React.FC = () => {
   const { isAuthenticated, isLoading } = useAuth0();
@@ -48,15 +49,16 @@ const Contents: React.FC = () => {
           <StepsVsCaloriesByDate />
         </Grid>
         <Grid item md={6} sm={12}>
-          <HeartRateBreakDown />
+          <DailyVeryActiveMinutes />
         </Grid>
         <Grid item md={6} sm={12}>
-          <DailyVeryActiveMinutes />
+          <CaloriesByDate />
         </Grid>
         <Grid item md={6} sm={12}>
           <CaloriesVsDistance />
         </Grid>
       </Grid>
+      <br />
     </>
   );
 };
