@@ -1,6 +1,8 @@
-import { useQuery, useReactiveVar } from "@apollo/client";
+import { useLazyQuery, useReactiveVar } from "@apollo/client";
 import { useAuth0 } from "@auth0/auth0-react";
-import { Series } from "../../../dto/Charts.dto";
+import { Stack, Tooltip } from "@mui/material";
+import Button from "@mui/material/Button";
+import { useCallback, useState } from "react";
 import { Query_Root } from "../../../generated/graphql";
 import { HEART_RATE_BY_DATE } from "../../../graphql/Queries";
 import { heartRateDateVar } from "../../../graphql/Store";
@@ -9,6 +11,7 @@ import DoughnutChart from "../../../stories/charts/doughnutChart/DoughnutChart";
 import BasicDatePicker from "../../basicDatePicker/BasicDatePicker";
 
 const HeartRateBreakDown: React.FC = () => {
+  const [fetched, setFetched] = useState(false);
   const { user } = useAuth0();
   const date = useReactiveVar(heartRateDateVar);
 
@@ -16,9 +19,12 @@ const HeartRateBreakDown: React.FC = () => {
 
   const localDate = date;
 
-  const { data, loading } = useQuery<Query_Root>(HEART_RATE_BY_DATE, {
-    variables: { userId, date: localDate },
-  });
+  const [fetchHeartRate, { data, loading }] = useLazyQuery<Query_Root>(
+    HEART_RATE_BY_DATE,
+    {
+      variables: { userId, date: localDate },
+    }
+  );
 
   const d = data?.HeartRate;
   const bpm = d?.map((item: any) => item.bpm);
@@ -38,20 +44,36 @@ const HeartRateBreakDown: React.FC = () => {
     }
   });
 
-  const labels = [
-    "Resting heart rate (betweeb 60 bpm and under 100 bpm)",
-    "Slow heart rate (below 60 bpm)",
-    "Fast heart rate (more than 100 bpm)",
-  ];
+  const labels = ["Fast bpm", "Resting bpm", "Slow bpm"];
   const values = Object.values(breakdown);
 
   return (
     <>
       <ChartContainer
-        title={"Heart Rate break down"}
+        title={"No. of bpm by status"}
         component={
           <>
-            <BasicDatePicker />
+            <Stack direction="row" spacing={2}>
+              <BasicDatePicker />
+              <Tooltip
+                title={
+                  "You need to click this button to see your heart rate data (approx. 9000 data points for each day)"
+                }
+                placement="right"
+              >
+                <Button
+                  variant="contained"
+                  onClick={useCallback(() => {
+                    fetchHeartRate();
+                    setFetched(true);
+                  }, [fetchHeartRate])}
+                  disabled={fetched}
+                >
+                  Fetch data!
+                </Button>
+              </Tooltip>
+            </Stack>
+            <br></br>
             <DoughnutChart labels={labels} values={values} loading={loading} />
           </>
         }

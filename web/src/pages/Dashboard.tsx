@@ -14,7 +14,7 @@ import AverageDailySteps from "../components/cards/averageDailySteps/AverageDail
 import DailyHeartRate from "../components/reports/dailyHeartRate/DailyHeartRate";
 import DailyVeryActiveMinutes from "../components/reports/dailyVeryActiveMinutes/DailyVeryActiveMinutes";
 import DoughnutChart from "../stories/charts/doughnutChart/DoughnutChart";
-import HeartRateBreakDown from "../components/reports/heartRateBreakBreakDown/HeartRateBreakDown";
+import HeartRateBreakDown from "../components/reports/heartRateBreakDown/HeartRateBreakDown";
 import CaloriesByDate from "../components/reports/caloriesByDate/CaloriesByDate";
 
 const Contents: React.FC = () => {
@@ -44,7 +44,6 @@ const Contents: React.FC = () => {
         <Grid item md={3} sm={12}>
           <AverageDailySteps />
         </Grid>
-
         <Grid item md={6} sm={12}>
           <StepsVsCaloriesByDate />
         </Grid>
@@ -57,8 +56,11 @@ const Contents: React.FC = () => {
         <Grid item md={6} sm={12}>
           <CaloriesVsDistance />
         </Grid>
-        <Grid item md={12} sm={12}>
+        <Grid item md={8} sm={12}>
           <DailyHeartRate />
+        </Grid>
+        <Grid item md={4} sm={12}>
+          <HeartRateBreakDown />
         </Grid>
       </Grid>
       <br />

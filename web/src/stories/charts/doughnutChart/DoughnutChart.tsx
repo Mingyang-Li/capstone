@@ -12,6 +12,7 @@ const DoughnutChart: React.FC<ChartProps> = (props: ChartProps) => {
     labels: props.labels as string[],
     chart: {
       type: "donut",
+      height: 350,
     },
     responsive: [
       {
@@ -33,7 +34,6 @@ const DoughnutChart: React.FC<ChartProps> = (props: ChartProps) => {
       options={options}
       series={props.values as number[]}
       type={"donut"}
-      height={350}
     />
   );
 };
