@@ -46,7 +46,6 @@ export class Seeding {
 
   openFileByUserId(userId: number, file: File) {
     const filePath = `${this.configService.PATH_LOCAL_DATASET}/p0${userId}/fitbit/${file}.json`;
-    // eslint-disable-next-line @typescript-eslint/no-var-requires
     const rawdata = require('fs').readFileSync(filePath, 'utf8');
     const json = JSON.parse(rawdata.toString());
     return json;
@@ -237,16 +236,11 @@ export const migrateHeartRate = () => {
       `⌛ === Migrating ${originalData.length} rows of HeartRate for person ${e.userId}`,
     );
 
-    const seeding = originalData.map(
-      async (e) => await prisma.distance.create({ data: e }),
-    );
-    console.log(
-      `👻 === Processed seeding: ${JSON.stringify(Promise.all(seeding))}`,
-    );
-
-    console.log(
-      `✔️ === Completed migrating ${originalData.length} rows of HeartRate for person ${e.userId}`,
-    );
+    await prisma.heartRate.createMany({ data: originalData }).then(() => {
+      console.log(
+        `✔️ === Completed migrating ${originalData.length} rows of HeartRate for person ${e.userId}`,
+      );
+    });
   });
 };
 
@@ -257,7 +251,7 @@ type Table =
   | 'HeartRate'
   | 'VeryActiveMinutes';
 
-export async function clearTable(table?: Table) {
+export const clearTable = async (table?: Table) => {
   switch (table) {
     case 'Calories':
       await prisma.calories.deleteMany({});
@@ -276,6 +270,7 @@ export async function clearTable(table?: Table) {
       await prisma.heartRate.deleteMany({});
       await prisma.veryActiveMinutes.deleteMany({});
   }
-}
+};
 
-migrateHeartRate();
+// const v8 = require('v8');
+// console.table(v8.getHeapStatistics());

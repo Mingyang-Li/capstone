@@ -5,8 +5,16 @@ import AppContainer from "../stories/appContainer/AppContainer";
 import { Forbidden } from "./Forbidden";
 import BasicDateRangePicker from "../components/basicDateRangePicker/BasicDateRangePicker";
 import StepsVsCaloriesByDate from "../components/reports/stepsVsCaloriesByDate/StepsVsCaloriesByDate";
-import StepsVsDistanceByDate from "../components/reports/stepsVsDistanceByDate/StepsVsDistanceByDate";
 import CaloriesVsDistance from "../components/reports/caloriesVsDistance/CaloriesVsDistance";
+import Grid from "@mui/material/Grid";
+import TotalCalories from "../components/cards/totalCalories/TotalCalories";
+import AverageDailyCalories from "../components/cards/averageDailyCalories/AverageDailyCalories";
+import TotalSteps from "../components/cards/totalSteps/TotalSteps";
+import AverageDailySteps from "../components/cards/averageDailySteps/AverageDailySteps";
+import DailyHeartRate from "../components/reports/dailyHeartRate/DailyHeartRate";
+import DailyVeryActiveMinutes from "../components/reports/dailyVeryActiveMinutes/DailyVeryActiveMinutes";
+import HeartRateBreakDown from "../components/reports/heartRateBreakDown/HeartRateBreakDown";
+import CaloriesByDate from "../components/reports/caloriesByDate/CaloriesByDate";
 
 const Contents: React.FC = () => {
   const { isAuthenticated, isLoading } = useAuth0();
@@ -22,11 +30,39 @@ const Contents: React.FC = () => {
     <>
       <BasicDateRangePicker />
       <br></br>
-      <StepsVsCaloriesByDate />
-      <br></br>
-      <StepsVsDistanceByDate />
-      <br></br>
-      <CaloriesVsDistance />
+      <Grid container spacing={2}>
+        <Grid item md={3} sm={12}>
+          <TotalCalories />
+        </Grid>
+        <Grid item md={3} sm={12}>
+          <AverageDailyCalories />
+        </Grid>
+        <Grid item md={3} sm={12}>
+          <TotalSteps />
+        </Grid>
+        <Grid item md={3} sm={12}>
+          <AverageDailySteps />
+        </Grid>
+        <Grid item md={6} sm={12}>
+          <StepsVsCaloriesByDate />
+        </Grid>
+        <Grid item md={6} sm={12}>
+          <DailyVeryActiveMinutes />
+        </Grid>
+        <Grid item md={6} sm={12}>
+          <CaloriesByDate />
+        </Grid>
+        <Grid item md={6} sm={12}>
+          <CaloriesVsDistance />
+        </Grid>
+        <Grid item md={8} sm={12}>
+          <DailyHeartRate />
+        </Grid>
+        <Grid item md={4} sm={12}>
+          <HeartRateBreakDown />
+        </Grid>
+      </Grid>
+      <br />
     </>
   );
 };

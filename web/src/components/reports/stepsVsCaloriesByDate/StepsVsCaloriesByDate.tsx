@@ -21,17 +21,17 @@ const StepsVsCaloriesByDate: React.FC = () => {
     variables: { userId, startDate, endDate },
   });
 
-  const distance = data?.CALORIES_BY_DATE;
-  const labels = distance?.map((item: any) => item.date);
-  const values_distance = distance?.map((item: any) => item.sum);
+  const calories = data?.CALORIES_BY_DATE;
+  const labels = calories?.map((item: any) => item.date);
+  const values_calories = calories?.map((item: any) => item.sum);
 
   const steps = data?.STEPS_BY_DATE;
   const values_steps = steps?.map((item: any) => item.sum);
 
   const series: Series[] = [
     {
-      name: "Distance (m)",
-      data: values_distance as number[],
+      name: "calories (KJs)",
+      data: values_calories as number[],
     },
     {
       name: "Steps",
