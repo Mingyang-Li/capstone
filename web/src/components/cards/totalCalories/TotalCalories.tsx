@@ -30,7 +30,7 @@ const TotalCalories: React.FC = () => {
   return (
     <InfoCard
       loading={loading}
-      title="Total Calories"
+      title="Total calories intake"
       countUp={
         <CountUp
           start={0}
