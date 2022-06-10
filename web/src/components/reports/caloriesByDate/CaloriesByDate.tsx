@@ -26,7 +26,7 @@ const CaloriesByDate: React.FC = () => {
   const values = d?.map((item: any) => item.sum);
   const series: Series[] = [
     {
-      name: "Calories (KJs)",
+      name: "Calories intake (KJs)",
       data: values as number[],
     },
     {
@@ -38,7 +38,7 @@ const CaloriesByDate: React.FC = () => {
   return (
     <>
       <ChartContainer
-        title={"Calories by date"}
+        title={"Calories intake by date"}
         component={
           <LineChart labels={labels} series={series} loading={loading} />
         }
