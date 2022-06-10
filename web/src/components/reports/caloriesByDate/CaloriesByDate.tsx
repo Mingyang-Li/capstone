@@ -5,7 +5,6 @@ import { Query_Root } from "../../../generated/graphql";
 import { CALORIES_BY_DATE } from "../../../graphql/Queries";
 import { startDateVar, endDateVar } from "../../../graphql/Store";
 import { ChartContainer } from "../../../stories/chartContainer/ChartContainer";
-import ColumnChart from "../../../stories/charts/columnChart/ColumChart";
 import LineChart from "../../../stories/charts/lineChart/LineChart";
 
 const CaloriesByDate: React.FC = () => {

@@ -13,7 +13,6 @@ import TotalSteps from "../components/cards/totalSteps/TotalSteps";
 import AverageDailySteps from "../components/cards/averageDailySteps/AverageDailySteps";
 import DailyHeartRate from "../components/reports/dailyHeartRate/DailyHeartRate";
 import DailyVeryActiveMinutes from "../components/reports/dailyVeryActiveMinutes/DailyVeryActiveMinutes";
-import DoughnutChart from "../stories/charts/doughnutChart/DoughnutChart";
 import HeartRateBreakDown from "../components/reports/heartRateBreakDown/HeartRateBreakDown";
 import CaloriesByDate from "../components/reports/caloriesByDate/CaloriesByDate";
 
