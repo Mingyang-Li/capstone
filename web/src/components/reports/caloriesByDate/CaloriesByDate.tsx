@@ -38,7 +38,7 @@ const CaloriesByDate: React.FC = () => {
   return (
     <>
       <ChartContainer
-        title={"Calories intake by date"}
+        title={"Calories burnt by date"}
         component={
           <LineChart labels={labels} series={series} loading={loading} />
         }
