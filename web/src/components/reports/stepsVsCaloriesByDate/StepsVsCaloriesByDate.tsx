@@ -30,7 +30,7 @@ const StepsVsCaloriesByDate: React.FC = () => {
 
   const series: Series[] = [
     {
-      name: "Calories intake (KJs)",
+      name: "Calories burnt (KJs)",
       data: values_calories as number[],
     },
     {

@@ -26,11 +26,11 @@ const CaloriesByDate: React.FC = () => {
   const values = d?.map((item: any) => item.sum);
   const series: Series[] = [
     {
-      name: "Calories intake (KJs)",
+      name: "Calories burnt (KJs)",
       data: values as number[],
     },
     {
-      name: "Avg daily intake (KJs)",
+      name: "Average daily calories burnt (KJs)",
       type: "line",
       data: values?.map(() => 2000) as number[],
     },
