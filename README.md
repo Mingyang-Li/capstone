@@ -4,7 +4,7 @@ Data visualisation web application for 10 million healthcare-related data points
 
 Live demo: https://healthkit.netlify.app/login
 
-### 🔒 Demo lredentials
+### 🔒 Demo Credentials
 
 | Usernames                | passwords        |
 | :----------------------- | :--------------- |
