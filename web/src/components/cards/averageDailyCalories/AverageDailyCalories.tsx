@@ -32,7 +32,7 @@ const AverageDailyCalories: React.FC = () => {
   return (
     <InfoCard
       loading={loading}
-      title="Avg daily calories intake"
+      title="Avg calories burnt daily"
       countUp={
         <CountUp
           start={0}
