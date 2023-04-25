@@ -3,7 +3,6 @@
 Data visualisation web application for 10 million healthcare-related data points
 
 Recording of demo: https://www.loom.com/share/46318be5da06439fb49df1681637771d
-Live demo: https://healthkit.netlify.app/login
 
 ### 🔒 Demo Credentials
 
