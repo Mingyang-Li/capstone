@@ -4,6 +4,9 @@ Data visualisation web application for 10 million healthcare-related data points
 
 Recording of demo: https://www.loom.com/share/46318be5da06439fb49df1681637771d
 
+### 📚 Requirements
+Requirements doc (Charts to visualise) can be found [here](https://overjoyed-patient-9c1.notion.site/4038e4b21875442f98541be1583e28d4?v=ea543924cd9c41ffa89cc4d473e2a8b2&pvs=4)
+
 ### 🔒 Demo Credentials
 
 | Usernames                | passwords        |
